@@ -12,11 +12,32 @@ useHead({
     },
   ],
 });
+
+const stack = [
+  {
+    name: "Nuxt",
+    description: "The Progressive Web Framework",
+  },
+  {
+    name: "Tailwind CSS",
+    description: "",
+  },
+  {
+    name: "Shadcn Vue",
+    description: "",
+  },
+  {
+    name: "Dark Mode",
+    description: "",
+  },
+];
 </script>
 
 <template>
   <div class="flex flex-col min-h-screen bg-background">
-    <header class="container mx-auto px-4 lg:px-0 py-6 flex justify-end items-center gap-2">
+    <header
+      class="container mx-auto px-4 lg:px-0 py-6 flex justify-end items-center gap-2"
+    >
       <Button as-child>
         <NuxtLink to="/auth/login">Login</NuxtLink>
       </Button>
@@ -25,7 +46,9 @@ useHead({
       </Button>
     </header>
 
-    <div class="flex-1 flex items-center justify-center px-4 lg:px-0 py-4 lg:py-10">
+    <div
+      class="flex-1 flex items-center justify-center px-4 lg:px-0 py-4 lg:py-10"
+    >
       <Card class="w-full max-w-sm">
         <CardHeader>
           <CardTitle>Let's get started</CardTitle>
