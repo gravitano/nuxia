@@ -14,7 +14,7 @@
       <AlertDescription>
         Please proceed with caution. This action cannot be undone.
 
-        <Button variant="destructive" class="mt-2"> Delete account </Button>
+        <SettingsDeleteAccountDialog />
       </AlertDescription>
     </Alert>
   </div>
