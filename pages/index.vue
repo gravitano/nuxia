@@ -2,10 +2,20 @@
 definePageMeta({
   layout: "blank",
 });
+
+useHead({
+  title: "Nuxt Starter Kit",
+  meta: [
+    {
+      name: "description",
+      content: "Nuxt Starter Kit",
+    },
+  ],
+});
 </script>
 
 <template>
-  <div>
+  <div class="flex flex-col min-h-screen bg-background">
     <header class="container mx-auto px-4 lg:px-0 py-6 flex justify-end items-center gap-2">
       <Button as-child>
         <NuxtLink to="/auth/login">Login</NuxtLink>
@@ -15,8 +25,8 @@ definePageMeta({
       </Button>
     </header>
 
-    <div class="max-w-xl mx-auto px-4 lg:px-0 py-4 lg:py-10">
-      <Card>
+    <div class="flex-1 flex items-center justify-center px-4 lg:px-0 py-4 lg:py-10">
+      <Card class="w-full max-w-sm">
         <CardHeader>
           <CardTitle>Let's get started</CardTitle>
           <CardDescription>
@@ -25,7 +35,7 @@ definePageMeta({
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <ul class="list-disc list-inside mt-1">
+          <ul class="list-disc list-inside">
             <li>
               <a
                 href="https://nuxt.com/docs/getting-started/introduction"
