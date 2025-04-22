@@ -1,5 +1,12 @@
 <script setup lang="ts">
-//
+definePageMeta({
+  breadcrumbs: [
+    {
+      text: 'Settings',
+      href: '/settings',
+    },
+  ],
+})
 </script>
 
 <template>
@@ -12,7 +19,7 @@
     </div>
 
     <div class="flex flex-col lg:flex-row gap-6 items-start relative">
-      <div class="lg:w-3/12">
+      <div class="w-full lg:w-3/12">
         <div class="sticky top-0">
           <SettingsMenu />
         </div>
