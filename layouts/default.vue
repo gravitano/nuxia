@@ -16,11 +16,15 @@ import {
 } from "@/components/ui/sidebar";
 
 const route = useRoute();
-const breadcrumbs = (route.meta?.breadcrumbs ?? []) as Array<{
-  text: string;
-  href: string;
-}>;
-const hasBreadcrumbs = breadcrumbs.length > 0;
+const breadcrumbs = computed(() => {
+  return (route.meta?.breadcrumbs ?? []) as Array<{
+    text: string;
+    href: string;
+  }>;
+});
+const hasBreadcrumbs = computed(() => {
+  return breadcrumbs.value.length > 0;
+});
 </script>
 
 <template>
