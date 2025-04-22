@@ -17,7 +17,7 @@ import {
   useSidebar,
 } from "@/components/ui/sidebar";
 import {
-  BadgeCheck,
+  Settings,
   Bell,
   ChevronsUpDown,
   CreditCard,
@@ -84,26 +84,28 @@ function logout() {
             </div>
           </DropdownMenuLabel>
           <DropdownMenuSeparator />
-          <DropdownMenuGroup>
+          <!-- <DropdownMenuGroup>
             <DropdownMenuItem>
               <Sparkles />
               Upgrade to Pro
             </DropdownMenuItem>
           </DropdownMenuGroup>
-          <DropdownMenuSeparator />
+          <DropdownMenuSeparator /> -->
           <DropdownMenuGroup>
-            <DropdownMenuItem>
-              <BadgeCheck />
-              Account
+            <DropdownMenuItem as-child>
+              <NuxtLink to="/settings" class="flex items-center gap-2">
+                <Settings />
+                Settings
+              </NuxtLink>
             </DropdownMenuItem>
-            <DropdownMenuItem>
+            <!-- <DropdownMenuItem>
               <CreditCard />
               Billing
             </DropdownMenuItem>
             <DropdownMenuItem>
               <Bell />
               Notifications
-            </DropdownMenuItem>
+            </DropdownMenuItem> -->
           </DropdownMenuGroup>
           <DropdownMenuSeparator />
           <DropdownMenuItem @click="logout">
