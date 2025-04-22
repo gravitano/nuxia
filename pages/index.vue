@@ -1,13 +1,4 @@
 <script setup lang="ts">
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-
 definePageMeta({
   layout: "blank",
 });
@@ -15,7 +6,7 @@ definePageMeta({
 
 <template>
   <div>
-    <header class="container">
+    <header class="container mx-auto px-4 lg:px-0 py-6 flex justify-end items-center gap-2">
       <Button as-child>
         <NuxtLink to="/auth/login">Login</NuxtLink>
       </Button>
@@ -24,26 +15,22 @@ definePageMeta({
       </Button>
     </header>
 
-    <div class="container mx-auto p-6">
+    <div class="max-w-xl mx-auto px-4 lg:px-0 py-4 lg:py-10">
       <Card>
         <CardHeader>
-          <CardTitle>Card Title</CardTitle>
-          <CardDescription>Card Description</CardDescription>
-        </CardHeader>
-        <CardContent>
-          <h2 class="font-semibold text-lg">Let's get started</h2>
-
-          <p class="mt-2">
+          <CardTitle>Let's get started</CardTitle>
+          <CardDescription>
             Nuxt has an incredibly rich ecosystem. We suggest starting with the
             following.
-          </p>
-
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
           <ul class="list-disc list-inside mt-1">
             <li>
               <a
                 href="https://nuxt.com/docs/getting-started/introduction"
                 target="_blank"
-                class="text-blue-500 hover:underline"
+                class="text-primary text-sm font-medium hover:underline"
               >
                 Nuxt Documentation
               </a>
@@ -52,7 +39,7 @@ definePageMeta({
               <a
                 href="https://nuxt.com/modules"
                 target="_blank"
-                class="text-blue-500 hover:underline"
+                class="text-primary text-sm font-medium hover:underline"
               >
                 Nuxt Modules
               </a>
@@ -61,7 +48,7 @@ definePageMeta({
               <a
                 href="https://nuxt.com/examples"
                 target="_blank"
-                class="text-blue-500 hover:underline"
+                class="text-primary text-sm font-medium hover:underline"
               >
                 Nuxt Examples
               </a>
