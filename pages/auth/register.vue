@@ -1,10 +1,19 @@
 <script setup lang="ts">
 import type { RegisterFormValues } from '~/components/auth/RegisterForm.vue';
 
+useHead({
+  title: 'Register',
+  meta: [
+    {
+      name: 'description',
+      content: 'Register page for the application.',
+    },
+  ],
+})
+
 definePageMeta({
   layout: 'auth',
 })
-
 
 async function onSubmit(values: RegisterFormValues) {
   const res = await $fetch('/api/auth/register', {

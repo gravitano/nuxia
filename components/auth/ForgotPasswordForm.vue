@@ -1,7 +1,57 @@
-2<script setup lang="ts"></script>
+<script setup lang="ts">
+import { useForm } from "vee-validate";
+import { toTypedSchema } from "@vee-validate/zod";
+import * as z from "zod";
+
+import { Button } from "@/components/ui/button";
+import {
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import type { AlertMessageProps } from "../alert/AlertMessage.vue";
+
+const formSchema = z.object({
+  email: z.string().email("Invalid email address").min(1, "Email is required"),
+});
+
+export type LoginFormValues = z.infer<typeof formSchema>;
+
+const { handleSubmit, isSubmitting, resetForm } = useForm({
+  validationSchema: toTypedSchema(formSchema),
+});
+
+const alert = reactive<AlertMessageProps>({
+  description: "",
+  variant: "info",
+});
+
+const onSubmit = handleSubmit(async (values) => {
+  alert.description = "";
+  
+  const res = await $fetch("/api/auth/forgot-password", {
+    method: "POST",
+    body: JSON.stringify(values),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  if (res.data) {
+    alert.description = "Password reset link sent to your email";
+    alert.variant = "success";
+    resetForm();
+  } else {
+    alert.description = "Error sending password reset link";
+    alert.variant = "error";
+  }
+});
+</script>
 
 <template>
-  <form class="w-full max-w-sm">
+  <form class="w-full max-w-sm" @submit="onSubmit">
     <Card>
       <CardHeader>
         <CardTitle class="text-2xl"> Forgot Password </CardTitle>
@@ -11,17 +61,24 @@
       </CardHeader>
       <CardContent>
         <div class="grid gap-4">
-          <div class="grid gap-2">
-            <Label for="email">Email</Label>
-            <Input
-              id="email"
-              type="email"
-              placeholder="m@example.com"
-              required
-            />
-          </div>
-          <Button type="submit" class="w-full"> 
-            Send password reset link  
+          <AlertMessage v-if="alert.description" v-bind="alert" />
+
+          <FormField v-slot="{ componentField }" name="email">
+            <FormItem>
+              <FormLabel>Email</FormLabel>
+              <FormControl>
+                <Input
+                  type="email"
+                  placeholder="Enter your email"
+                  v-bind="componentField"
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          </FormField>
+
+          <Button type="submit" class="w-full" :disabled="isSubmitting">
+            Send password reset link
           </Button>
         </div>
         <div class="mt-4 text-center text-sm">

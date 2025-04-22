@@ -40,6 +40,14 @@
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+  --color-warning: var(--warning);
+  --color-warning-foreground: var(--warning-foreground);
+  --color-error: var(--error);
+  --color-error-foreground: var(--error-foreground);
+  --color-info: var(--info);
+  --color-info-foreground: var(--info-foreground);
 }
 
 :root {
@@ -76,6 +84,18 @@
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
+  
+  --success: oklch(0.6 0.25 27); /* Merah */
+  --success-foreground: oklch(1 0 0); /* Putih */
+  
+  --warning: oklch(0.75 0.21 52); /* Orange */
+  --warning-foreground: oklch(0.15 0.02 52); /* Cokelat tua */
+  
+  --error: oklch(0.6 0.25 27); /* Merah */
+  --error-foreground: oklch(1 0 0); /* Putih */
+  
+  --info: oklch(0.75 0.13 230); /* Biru muda */
+  --info-foreground: oklch(0.15 0.02 230); /* Biru gelap */
 }
 
 .dark {
@@ -111,6 +131,18 @@
   --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: oklch(0.269 0 0);
   --sidebar-ring: oklch(0.439 0 0);
+  
+  --success: oklch(0.45 0.2 27); /* Merah gelap */
+  --success-foreground: oklch(0.95 0.01 27); /* Putih pudar */
+  
+  --warning: oklch(0.6 0.18 52); /* Orange gelap */
+  --warning-foreground: oklch(0.95 0.01 52); /* Putih pudar */
+  
+  --error: oklch(0.45 0.2 27); /* Merah gelap */
+  --error-foreground: oklch(0.95 0.01 27); /* Putih pudar */
+  
+  --info: oklch(0.6 0.1 230); /* Biru muda gelap */
+  --info-foreground: oklch(0.98 0.01 230); /* Putih pudar */
 }
 
 @layer base {

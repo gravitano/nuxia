@@ -1,6 +1,16 @@
 <script setup lang="ts">
 import type { LoginFormValues } from '~/components/auth/LoginForm.vue';
 
+useHead({
+  title: 'Login',
+  meta: [
+    {
+      name: 'description',
+      content: 'Login page for the application.',
+    },
+  ],
+})
+
 definePageMeta({
   layout: 'auth',
 })
