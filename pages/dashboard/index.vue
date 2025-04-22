@@ -6,7 +6,11 @@ definePageMeta({
       href: "/dashboard",
     },
   ],
-})
+});
+
+useHead({
+  title: "Dashboard",
+});
 </script>
 
 <template>
