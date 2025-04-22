@@ -40,4 +40,12 @@ export default defineNuxtConfig({
     fallback: "light",
     storage: "cookie",
   },
+
+  app: {
+    head: {
+      htmlAttrs: {
+        lang: "en",
+      },
+    },
+  },
 });
