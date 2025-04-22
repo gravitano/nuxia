@@ -15,7 +15,7 @@ definePageMeta({
 
 <template>
   <div class="grid gap-8">
-    <SettingsProfileUpdateSection />
-    <SettingsDeleteAccountSection />
+    <SettingsProfileInformation />
+    <SettingsDeleteAccount />
   </div>
 </template>
