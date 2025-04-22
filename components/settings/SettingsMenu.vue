@@ -20,8 +20,8 @@ const menus = [
     <li v-for="menu in menus" :key="menu.label">
       <NuxtLink
         :to="menu.to"
-        class="w-full flex items-center px-3 py-2 rounded-md hover:bg-gray-100 text-sm font-medium"
-        exact-active-class="bg-gray-100 text-gray-900"
+        class="w-full flex items-center px-3 py-2 rounded-md hover:bg-neutral-100 dark:hover:bg-neutral-900 text-sm font-medium"
+        exact-active-class="bg-neutral-100 dark:bg-neutral-900 text-neutral-900 dark:text-neutral-100"
       >
         {{ menu.label }}
       </NuxtLink>

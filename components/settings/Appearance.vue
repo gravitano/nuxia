@@ -2,7 +2,6 @@
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Computer, Moon, Sun } from "lucide-vue-next";
 
-const activeTab = ref("system");
 const tabs = [
   {
     value: "system",
@@ -31,7 +30,7 @@ const tabs = [
       </p>
     </header>
 
-    <Tabs v-model="activeTab">
+    <Tabs v-model="$colorMode.preference">
       <TabsList>
         <TabsTrigger v-for="tab in tabs" :key="tab.value" :value="tab.value">
           <component :is="tab.icon" class="mr-2 h-4 w-4" />

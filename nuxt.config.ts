@@ -13,6 +13,7 @@ export default defineNuxtConfig({
     "@nuxt/scripts",
     "@nuxt/test-utils",
     "shadcn-nuxt",
+    "@nuxtjs/color-mode",
   ],
 
   css: ["~/assets/css/tailwind.css"],
@@ -31,5 +32,12 @@ export default defineNuxtConfig({
      * @default "./components/ui"
      */
     componentDir: "./components/ui",
+  },
+
+  colorMode: {
+    classSuffix: "",
+    preference: "system", // atau 'dark' | 'light'
+    fallback: "light",
+    storage: "cookie",
   },
 });
