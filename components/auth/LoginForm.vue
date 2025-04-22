@@ -1,7 +1,41 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { useForm } from "vee-validate";
+import { toTypedSchema } from "@vee-validate/zod";
+import * as z from "zod";
+
+import { Button } from "@/components/ui/button";
+import {
+  FormControl,
+  FormDescription,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+
+const emit = defineEmits<{
+  submit: [values: LoginFormValues];
+}>();
+
+const formSchema = z.object({
+  email: z.string().email("Invalid email address").min(1, "Email is required"),
+  password: z.string(),
+});
+
+export type LoginFormValues = z.infer<typeof formSchema>;
+
+const {handleSubmit, isSubmitting} = useForm({
+  validationSchema: toTypedSchema(formSchema),
+});
+
+const onSubmit = handleSubmit((values) => {
+  emit("submit", values);
+});
+</script>
 
 <template>
-  <form class="w-full max-w-sm">
+  <form class="w-full max-w-sm" @submit="onSubmit">
     <Card>
       <CardHeader>
         <CardTitle class="text-2xl"> Login </CardTitle>
@@ -11,26 +45,53 @@
       </CardHeader>
       <CardContent>
         <div class="grid gap-4">
-          <div class="grid gap-2">
-            <Label for="email">Email</Label>
-            <Input
-              id="email"
-              type="email"
-              placeholder="m@example.com"
-              required
-            />
-          </div>
-          <div class="grid gap-2">
-            <div class="flex items-center">
-              <Label for="password">Password</Label>
-              <NuxtLink to="/auth/forgot-password" class="ml-auto inline-block text-sm underline">
-                Forgot your password?
-              </NuxtLink>
-            </div>
-            <Input id="password" type="password" required />
-          </div>
-          <Button type="submit" class="w-full"> Login </Button>
-          <Button type="button" variant="outline" class="w-full"> Login with Google </Button>
+          <FormField v-slot="{ componentField }" name="email">
+            <FormItem>
+              <FormLabel>Email</FormLabel>
+              <FormControl>
+                <Input
+                  type="email"
+                  placeholder="Enter your email"
+                  v-bind="componentField"
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          </FormField>
+
+          <FormField v-slot="{ componentField }" name="password">
+            <FormItem>
+              <div class="flex items-center">
+                <FormLabel for="password">Password</FormLabel>
+                <NuxtLink
+                  to="/auth/forgot-password"
+                  class="ml-auto inline-block text-sm underline"
+                >
+                  Forgot your password?
+                </NuxtLink>
+              </div>
+              <FormControl>
+                <Input
+                  type="password"
+                  placeholder="Enter your password"
+                  v-bind="componentField"
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          </FormField>
+
+          <Button type="submit" class="w-full" :disabled="isSubmitting">
+            Login
+          </Button>
+          <Button
+            type="button"
+            variant="outline"
+            class="w-full"
+            :disabled="isSubmitting"
+          >
+            Login with Google
+          </Button>
         </div>
         <div class="mt-4 text-center text-sm">
           Don't have an account?
