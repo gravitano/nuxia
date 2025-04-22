@@ -9,7 +9,7 @@
       </p>
     </header>
 
-    <Alert variant="error">
+    <Alert variant="destructive">
       <AlertTitle>Warning</AlertTitle>
       <AlertDescription>
         Please proceed with caution. This action cannot be undone.
