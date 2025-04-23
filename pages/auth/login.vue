@@ -19,21 +19,24 @@ definePageMeta({
 
 const { fetch: refreshSession } = useUserSession();
 
-async function onSubmit(values: LoginFormValues) {
-  const res = await $fetch("/api/auth/login", {
+function onSubmit(values: LoginFormValues) {
+  $fetch("/api/auth/login", {
     method: "POST",
     body: JSON.stringify(values),
     headers: {
       "Content-Type": "application/json",
     },
-  });
-
-  if (res.data) {
-    await refreshSession();
-    navigateTo("/dashboard");
-  } else {
-    toast.error("Login failed. Please check your credentials.");
-  }
+  })
+    .then(async () => {
+      await refreshSession();
+      navigateTo("/dashboard");
+    })
+    .catch((error) => {
+      toast.error(
+        error.data?.message ||
+          "An error occurred while logging in. Please try again."
+      );
+    });
 }
 </script>
 

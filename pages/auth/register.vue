@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { toast } from "vue-sonner";
 import type { RegisterFormValues } from "~/components/auth/RegisterForm.vue";
 
 useHead({
@@ -16,20 +17,23 @@ definePageMeta({
   middleware: "guest",
 });
 
-async function onSubmit(values: RegisterFormValues) {
-  const res = await $fetch("/api/auth/register", {
+function onSubmit(values: RegisterFormValues) {
+  $fetch("/api/auth/register", {
     method: "POST",
     body: JSON.stringify(values),
     headers: {
       "Content-Type": "application/json",
     },
-  });
-  if (res.data) {
-    navigateTo("/auth/login");
-  } else {
-    // Handle error
-    console.error("Login failed:", res);
-  }
+  })
+    .then(() => {
+      navigateTo("/auth/login");
+    })
+    .catch((error) => {
+      toast.error(
+        error.data?.message ||
+          "An error occurred while registering. Please try again."
+      );
+    });
 }
 </script>
 

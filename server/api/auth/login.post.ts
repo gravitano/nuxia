@@ -1,27 +1,65 @@
+import { defineEventHandler, readBody } from "h3";
+import { generateAccessToken } from "~/server/utils/jwt";
+
 export default defineEventHandler(async (event) => {
   const body = await readBody(event);
-  const { email } = body;
+  const { email, password } = body;
 
-  const user = {
-    id: 1,
-    name: "Warsono",
-    email,
-  };
+  if (!email || !password) {
+    return { error: "Email and password are required" };
+  }
 
+  // Cari user berdasarkan email
+  const user = await db.query.users.findFirst({
+    where: (u, { eq }) => eq(u.email, email),
+  });
+
+  console.log("user", user);
+
+  if (!user) {
+    return createError({
+      statusCode: 401,
+      statusMessage: "Invalid email or password",
+    });
+  }
+
+  // Cek password cocok
+  const isValid = await verifyPassword(user.password, password);
+  if (!isValid) {
+    return createError({
+      statusCode: 401,
+      statusMessage: "Invalid email or password",
+    });
+  }
+
+  // Generate access token
+  const accessToken = generateAccessToken({
+    sub: user.id,
+    name: user.name,
+    email: user.email,
+  });
+
+  // Simpan session
   await setUserSession(event, {
-    user,
-    // Private data accessible only on server/ routes
-    secure: {
-      apiToken: "1234567890",
+    user: {
+      id: user.id,
+      name: user.name,
+      email: user.email,
     },
-    // Any extra fields for the session data
+    secure: {
+      apiToken: accessToken,
+    },
     loggedInAt: new Date(),
   });
 
   return {
     data: {
-      user,
-      access_token: "dummy_token_123456",
+      user: {
+        id: user.id,
+        name: user.name,
+        email: user.email,
+      },
+      access_token: accessToken,
     },
   };
 });
