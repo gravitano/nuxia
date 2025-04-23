@@ -35,9 +35,10 @@ const props = defineProps<{
 
 const { isMobile } = useSidebar();
 
+const { clear } = useUserSession();
+
 function logout() {
-  // Implement logout logic here
-  console.log("Logging out...");
+  clear();
 
   navigateTo({
     path: "/auth/login",

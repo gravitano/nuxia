@@ -31,6 +31,8 @@ const stack = [
     description: "",
   },
 ];
+
+const { loggedIn } = useUserSession();
 </script>
 
 <template>
@@ -38,12 +40,17 @@ const stack = [
     <header
       class="container mx-auto px-4 lg:px-0 py-6 flex justify-end items-center gap-2"
     >
-      <Button as-child>
-        <NuxtLink to="/auth/login">Login</NuxtLink>
+      <Button v-if="loggedIn" as-child>
+        <NuxtLink to="/dashboard">Dashboard</NuxtLink>
       </Button>
-      <Button as-child>
-        <NuxtLink to="/auth/register">Register</NuxtLink>
-      </Button>
+      <template v-else>
+        <Button as-child>
+          <NuxtLink to="/auth/login">Login</NuxtLink>
+        </Button>
+        <Button as-child>
+          <NuxtLink to="/auth/register">Register</NuxtLink>
+        </Button>
+      </template>
     </header>
 
     <div

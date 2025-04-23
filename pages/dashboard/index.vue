@@ -1,5 +1,6 @@
 <script setup lang="ts">
 definePageMeta({
+  middleware: ["requires-auth"],
   breadcrumbs: [
     {
       text: "Dashboard",

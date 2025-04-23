@@ -1,12 +1,13 @@
 <script setup lang="ts">
 definePageMeta({
+  middleware: ["requires-auth"],
   breadcrumbs: [
     {
-      text: 'Settings',
-      href: '/settings',
+      text: "Settings",
+      href: "/settings",
     },
   ],
-})
+});
 </script>
 
 <template>
