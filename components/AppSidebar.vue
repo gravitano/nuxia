@@ -1,17 +1,17 @@
 <script setup lang="ts">
-import type { SidebarProps } from '@/components/ui/sidebar'
+import type { SidebarProps } from "@/components/ui/sidebar";
 
-import NavMain from '@/components/NavMain.vue'
-import NavProjects from '@/components/NavProjects.vue'
-import NavUser from '@/components/NavUser.vue'
-import TeamSwitcher from '@/components/TeamSwitcher.vue'
+import NavMain from "@/components/NavMain.vue";
+import NavProjects from "@/components/NavProjects.vue";
+import NavUser from "@/components/NavUser.vue";
+import TeamSwitcher from "@/components/TeamSwitcher.vue";
 import {
   Sidebar,
   SidebarContent,
   SidebarFooter,
   SidebarHeader,
   SidebarRail,
-} from '@/components/ui/sidebar'
+} from "@/components/ui/sidebar";
 
 import {
   AudioWaveform,
@@ -25,34 +25,39 @@ import {
   PieChart,
   Settings2,
   SquareTerminal,
-} from 'lucide-vue-next'
+} from "lucide-vue-next";
 
 const props = withDefaults(defineProps<SidebarProps>(), {
-  collapsible: 'icon',
-})
+  collapsible: "icon",
+});
+
+const { user } = useUserSession();
+const userData = computed(() => {
+  return {
+    id: user.value?.id!,
+    name: user.value?.name!,
+    email: user.value?.email!,
+    avatar: "https://avatars.githubusercontent.com/u/5087538?v=4",
+  };
+});
 
 // This is sample data.
 const data = {
-  user: {
-    name: 'shadcn',
-    email: 'm@example.com',
-    avatar: '/avatars/shadcn.jpg',
-  },
   teams: [
     {
-      name: 'Acme Inc',
+      name: "Acme Inc",
       logo: GalleryVerticalEnd,
-      plan: 'Enterprise',
+      plan: "Enterprise",
     },
     {
-      name: 'Acme Corp.',
+      name: "Acme Corp.",
       logo: AudioWaveform,
-      plan: 'Startup',
+      plan: "Startup",
     },
     {
-      name: 'Evil Corp.',
+      name: "Evil Corp.",
       logo: Command,
-      plan: 'Free',
+      plan: "Free",
     },
   ],
   navMain: [
@@ -161,12 +166,12 @@ const data = {
   ],
   navSimple: [
     {
-      name: 'Dashboard',
-      url: '/dashboard',
+      name: "Dashboard",
+      url: "/dashboard",
       icon: LayoutDashboard,
     },
-  ]
-}
+  ],
+};
 </script>
 
 <template>
@@ -180,7 +185,7 @@ const data = {
       <!-- <NavProjects :projects="data.projects" /> -->
     </SidebarContent>
     <SidebarFooter>
-      <NavUser :user="data.user" />
+      <NavUser :user="userData" />
     </SidebarFooter>
     <SidebarRail />
   </Sidebar>

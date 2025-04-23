@@ -4,7 +4,7 @@ export default defineEventHandler(async (event) => {
 
   const user = {
     id: 1,
-    name: "John Doe",
+    name: "Warsono",
     email,
   };
 
