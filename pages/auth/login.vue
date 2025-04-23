@@ -14,6 +14,7 @@ useHead({
 
 definePageMeta({
   layout: "auth",
+  middleware: "guest",
 });
 
 const { fetch: refreshSession } = useUserSession();

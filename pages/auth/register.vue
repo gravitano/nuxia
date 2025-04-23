@@ -1,33 +1,34 @@
 <script setup lang="ts">
-import type { RegisterFormValues } from '~/components/auth/RegisterForm.vue';
+import type { RegisterFormValues } from "~/components/auth/RegisterForm.vue";
 
 useHead({
-  title: 'Register',
+  title: "Register",
   meta: [
     {
-      name: 'description',
-      content: 'Register page for the application.',
+      name: "description",
+      content: "Register page for the application.",
     },
   ],
-})
+});
 
 definePageMeta({
-  layout: 'auth',
-})
+  layout: "auth",
+  middleware: "guest",
+});
 
 async function onSubmit(values: RegisterFormValues) {
-  const res = await $fetch('/api/auth/register', {
-    method: 'POST',
+  const res = await $fetch("/api/auth/register", {
+    method: "POST",
     body: JSON.stringify(values),
     headers: {
-      'Content-Type': 'application/json',
+      "Content-Type": "application/json",
     },
   });
   if (res.data) {
-    navigateTo('/auth/login');
+    navigateTo("/auth/login");
   } else {
     // Handle error
-    console.error('Login failed:', res);
+    console.error("Login failed:", res);
   }
 }
 </script>
