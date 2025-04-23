@@ -1,34 +1,34 @@
 <script setup lang="ts">
-import type { LoginFormValues } from '~/components/auth/LoginForm.vue';
+import { toast } from "vue-sonner";
+import type { LoginFormValues } from "~/components/auth/LoginForm.vue";
 
 useHead({
-  title: 'Login',
+  title: "Login",
   meta: [
     {
-      name: 'description',
-      content: 'Login page for the application.',
+      name: "description",
+      content: "Login page for the application.",
     },
   ],
-})
+});
 
 definePageMeta({
-  layout: 'auth',
-})
+  layout: "auth",
+});
 
 async function onSubmit(values: LoginFormValues) {
-  const res = await $fetch('/api/auth/login', {
-    method: 'POST',
+  const res = await $fetch("/api/auth/login", {
+    method: "POST",
     body: JSON.stringify(values),
     headers: {
-      'Content-Type': 'application/json',
+      "Content-Type": "application/json",
     },
   });
+
   if (res.data) {
-    // Handle successful login
-    navigateTo('/dashboard');
+    navigateTo("/dashboard");
   } else {
-    // Handle error
-    console.error('Login failed:', res);
+    toast.error("Login failed. Please check your credentials.");
   }
 }
 </script>

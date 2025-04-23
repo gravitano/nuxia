@@ -37,12 +37,9 @@ const { isMobile } = useSidebar();
 
 const { clear } = useUserSession();
 
-function logout() {
-  clear();
-
-  navigateTo({
-    path: "/auth/login",
-  });
+async function logout() {
+  await clear();
+  navigateTo("/auth/login");
 }
 </script>
 
