@@ -29,24 +29,26 @@ const alert = reactive<AlertMessageProps>({
   variant: "info",
 });
 
-const onSubmit = handleSubmit(async (values) => {
+const onSubmit = handleSubmit((values) => {
   alert.description = "";
-  
-  const res = await $fetch("/api/auth/forgot-password", {
+
+  $fetch("/api/auth/forgot-password", {
     method: "POST",
     body: JSON.stringify(values),
     headers: {
       "Content-Type": "application/json",
     },
-  });
-  if (res.data) {
-    alert.description = "Password reset link sent to your email";
-    alert.variant = "success";
-    resetForm();
-  } else {
-    alert.description = "Error sending password reset link";
-    alert.variant = "error";
-  }
+  })
+    .then(() => {
+      alert.description = "Password reset link sent to your email";
+      alert.variant = "success";
+      resetForm();
+    })
+    .catch((error) => {
+      alert.description =
+        error.data?.message || "An error occurred. Please try again.";
+      alert.variant = "error";
+    });
 });
 </script>
 

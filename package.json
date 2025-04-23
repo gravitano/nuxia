@@ -30,6 +30,7 @@
     "eslint": "^9.0.0",
     "jsonwebtoken": "^9.0.2",
     "lucide-vue-next": "^0.503.0",
+    "nodemailer": "^6.10.1",
     "nuxt": "^3.16.2",
     "nuxt-auth-utils": "0.5.20",
     "pg": "^8.15.1",
@@ -46,6 +47,7 @@
   },
   "packageManager": "pnpm@9.12.2+sha512.22721b3a11f81661ae1ec68ce1a7b879425a1ca5b991c975b074ac220b187ce56c708fe5db69f4c962c989452eee76c82877f4ee80f474cebd61ee13461b6228",
   "devDependencies": {
+    "@types/nodemailer": "^6.4.17",
     "@types/pg": "^8.11.13",
     "drizzle-kit": "^0.31.0"
   }
