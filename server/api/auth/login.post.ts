@@ -1,9 +1,21 @@
 import { defineEventHandler, readBody } from "h3";
 import { generateAccessToken } from "~/server/utils/jwt";
+import { loginSchema } from "~/shared/shemas/login";
 
 export default defineEventHandler(async (event) => {
   const body = await readBody(event);
-  const { email, password } = body;
+
+  // validate with zod
+  const result = loginSchema.safeParse(body);
+  if (!result.success) {
+    return createError({
+      statusCode: 422,
+      statusMessage: "Validation error",
+      data: result.error,
+    });
+  }
+
+  const { email, password } = result.data;
 
   if (!email || !password) {
     return { error: "Email and password are required" };
