@@ -26,12 +26,18 @@ export default defineEventHandler(async (event) => {
     where: (u, { eq }) => eq(u.email, email),
   });
 
-  console.log("user", user);
-
   if (!user) {
     return createError({
       statusCode: 401,
       statusMessage: "Invalid email or password",
+    });
+  }
+
+  // Tambahkan pengecekan email terverifikasi
+  if (!user.emailVerifiedAt) {
+    return createError({
+      statusCode: 403,
+      statusMessage: "Please verify your email before logging in.",
     });
   }
 
