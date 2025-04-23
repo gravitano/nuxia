@@ -16,6 +16,8 @@ definePageMeta({
   layout: "auth",
 });
 
+const { fetch: refreshSession } = useUserSession();
+
 async function onSubmit(values: LoginFormValues) {
   const res = await $fetch("/api/auth/login", {
     method: "POST",
@@ -26,6 +28,7 @@ async function onSubmit(values: LoginFormValues) {
   });
 
   if (res.data) {
+    await refreshSession();
     navigateTo("/dashboard");
   } else {
     toast.error("Login failed. Please check your credentials.");
