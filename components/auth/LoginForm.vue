@@ -24,7 +24,7 @@ const formSchema = z.object({
 
 export type LoginFormValues = z.infer<typeof formSchema>;
 
-const {handleSubmit, isSubmitting} = useForm({
+const { handleSubmit, isSubmitting } = useForm({
   validationSchema: toTypedSchema(formSchema),
 });
 
@@ -44,6 +44,12 @@ const onSubmit = handleSubmit((values) => {
       </CardHeader>
       <CardContent>
         <div class="grid gap-4">
+          <AlertMessage
+            v-if="$route.query.verified"
+            variant="success"
+            description="Email verified successfully!"
+          />
+
           <FormField v-slot="{ componentField }" name="email">
             <FormItem>
               <FormLabel>Email</FormLabel>

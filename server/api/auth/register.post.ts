@@ -40,6 +40,15 @@ export default defineEventHandler(async (event) => {
 
   const user = inserted[0];
 
+  // send email verification
+  const token = sign({
+    id: user.id,
+    // 1 minute
+    expires: Date.now() + 60 * 1000, // 1 minute
+  });
+
+  await sendEmailVerificationEmail(user.email, token);
+
   return {
     data: {
       user: {
