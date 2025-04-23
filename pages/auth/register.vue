@@ -17,7 +17,13 @@ definePageMeta({
   middleware: "guest",
 });
 
+const isLoading = ref(false);
+const error = ref<string>();
+
 function onSubmit(values: RegisterFormValues) {
+  isLoading.value = true;
+  error.value = undefined;
+
   $fetch("/api/auth/register", {
     method: "POST",
     body: JSON.stringify(values),
@@ -28,15 +34,17 @@ function onSubmit(values: RegisterFormValues) {
     .then(() => {
       navigateTo("/auth/login");
     })
-    .catch((error) => {
-      toast.error(
-        error.data?.message ||
-          "An error occurred while registering. Please try again."
-      );
+    .catch((err) => {
+      error.value =
+        err.data?.message ||
+        "An error occurred while registering. Please try again.";
+    })
+    .finally(() => {
+      isLoading.value = false;
     });
 }
 </script>
 
 <template>
-  <AuthRegisterForm @submit="onSubmit" />
+  <AuthRegisterForm :is-loading="isLoading" :error="error" @submit="onSubmit" />
 </template>

@@ -14,6 +14,7 @@ import {
 import { Input } from "@/components/ui/input";
 import type { AlertMessageProps } from "../alert/AlertMessage.vue";
 import { resetPasswordSchema } from "~/shared/shemas/reset-password";
+import { Loader } from "lucide-vue-next";
 
 const route = useRoute();
 const token = route.query.token as string;
@@ -22,12 +23,14 @@ const { handleSubmit, isSubmitting, resetForm } = useForm({
   validationSchema: toTypedSchema(resetPasswordSchema),
 });
 
+const isLoading = ref(false);
 const alert = reactive<AlertMessageProps>({
   description: "",
   variant: "info",
 });
 
 const onSubmit = handleSubmit((values) => {
+  isLoading.value = true;
   alert.description = "";
 
   $fetch("/api/auth/reset-password", {
@@ -50,6 +53,9 @@ const onSubmit = handleSubmit((values) => {
       alert.description =
         error.data?.message || "An error occurred. Please try again.";
       alert.variant = "error";
+    })
+    .finally(() => {
+      isLoading.value = false;
     });
 });
 </script>
@@ -110,7 +116,16 @@ const onSubmit = handleSubmit((values) => {
             </FormItem>
           </FormField>
 
-          <Button type="submit" class="w-full" :disabled="isSubmitting">
+          <Button
+            type="submit"
+            class="w-full"
+            :disabled="isSubmitting || isLoading"
+          >
+            <Loader
+              v-if="isSubmitting || isLoading"
+              class="h-4 w-4 animate-spin"
+              aria-hidden="true"
+            />
             Reset Password
           </Button>
         </div>

@@ -12,6 +12,12 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { Loader } from "lucide-vue-next";
+
+const { isLoading } = defineProps<{
+  isLoading?: boolean;
+  error?: string;
+}>();
 
 const emit = defineEmits<{
   submit: [values: LoginFormValues];
@@ -50,6 +56,8 @@ const onSubmit = handleSubmit((values) => {
             description="Email verified successfully!"
           />
 
+          <AlertMessage v-if="error" variant="error" :description="error" />
+
           <FormField v-slot="{ componentField }" name="email">
             <FormItem>
               <FormLabel>Email</FormLabel>
@@ -86,14 +94,23 @@ const onSubmit = handleSubmit((values) => {
             </FormItem>
           </FormField>
 
-          <Button type="submit" class="w-full" :disabled="isSubmitting">
-            Login
+          <Button
+            type="submit"
+            class="w-full"
+            :disabled="isSubmitting || isLoading"
+          >
+            <Loader
+              v-if="isSubmitting || isLoading"
+              class="h-4 w-4 animate-spin"
+              aria-hidden="true"
+            />
+            {{ isSubmitting || isLoading ? "Logging in..." : "Login" }}
           </Button>
           <Button
             type="button"
             variant="outline"
             class="w-full"
-            :disabled="isSubmitting"
+            :disabled="isSubmitting || isLoading"
           >
             Login with Google
           </Button>

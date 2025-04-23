@@ -12,6 +12,12 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { Loader } from "lucide-vue-next";
+
+const { isLoading } = defineProps<{
+  isLoading?: boolean;
+  error?: string;
+}>();
 
 const emit = defineEmits<{
   submit: [values: RegisterFormValues];
@@ -45,6 +51,8 @@ const onSubmit = handleSubmit((values) => {
       </CardHeader>
       <CardContent>
         <div class="grid gap-4">
+          <AlertMessage v-if="error" variant="error" :description="error" />
+
           <FormField v-slot="{ componentField }" name="name">
             <FormItem>
               <FormLabel>Name</FormLabel>
@@ -87,14 +95,23 @@ const onSubmit = handleSubmit((values) => {
             </FormItem>
           </FormField>
 
-          <Button type="submit" class="w-full" :disabled="isSubmitting">
-            Create an account
+          <Button
+            type="submit"
+            class="w-full"
+            :disabled="isSubmitting || isLoading"
+          >
+            <Loader
+              v-if="isSubmitting || isLoading"
+              class="h-4 w-4 animate-spin"
+              aria-hidden="true"
+            />
+            {{ isSubmitting || isLoading ? "Creating..." : "Create Account" }}
           </Button>
           <Button
             type="button"
             variant="outline"
             class="w-full"
-            :disabled="isSubmitting"
+            :disabled="isSubmitting || isLoading"
           >
             Sign up with Google
           </Button>

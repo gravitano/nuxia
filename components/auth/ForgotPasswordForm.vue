@@ -13,6 +13,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import type { AlertMessageProps } from "../alert/AlertMessage.vue";
+import { Loader } from "lucide-vue-next";
 
 const formSchema = z.object({
   email: z.string().email("Invalid email address").min(1, "Email is required"),
@@ -24,12 +25,14 @@ const { handleSubmit, isSubmitting, resetForm } = useForm({
   validationSchema: toTypedSchema(formSchema),
 });
 
+const isLoading = ref(false);
 const alert = reactive<AlertMessageProps>({
   description: "",
   variant: "info",
 });
 
 const onSubmit = handleSubmit((values) => {
+  isLoading.value = true;
   alert.description = "";
 
   $fetch("/api/auth/forgot-password", {
@@ -48,6 +51,9 @@ const onSubmit = handleSubmit((values) => {
       alert.description =
         error.data?.message || "An error occurred. Please try again.";
       alert.variant = "error";
+    })
+    .finally(() => {
+      isLoading.value = false;
     });
 });
 </script>
@@ -79,7 +85,16 @@ const onSubmit = handleSubmit((values) => {
             </FormItem>
           </FormField>
 
-          <Button type="submit" class="w-full" :disabled="isSubmitting">
+          <Button
+            type="submit"
+            class="w-full"
+            :disabled="isSubmitting || isLoading"
+          >
+            <Loader
+              v-if="isSubmitting || isLoading"
+              class="h-4 w-4 animate-spin"
+              aria-hidden="true"
+            />
             Send password reset link
           </Button>
         </div>

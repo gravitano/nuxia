@@ -19,7 +19,13 @@ definePageMeta({
 
 const { fetch: refreshSession } = useUserSession();
 
+const isLoading = ref(false);
+const error = ref<string>();
+
 function onSubmit(values: LoginFormValues) {
+  isLoading.value = true;
+  error.value = undefined;
+
   $fetch("/api/auth/login", {
     method: "POST",
     body: JSON.stringify(values),
@@ -31,15 +37,17 @@ function onSubmit(values: LoginFormValues) {
       await refreshSession();
       navigateTo("/dashboard");
     })
-    .catch((error) => {
-      toast.error(
-        error.data?.message ||
-          "An error occurred while logging in. Please try again."
-      );
+    .catch((err) => {
+      error.value =
+        err.data?.message ||
+        "An error occurred while logging in. Please try again.";
+    })
+    .finally(() => {
+      isLoading.value = false;
     });
 }
 </script>
 
 <template>
-  <AuthLoginForm @submit="onSubmit" />
+  <AuthLoginForm :is-loading="isLoading" :error="error" @submit="onSubmit" />
 </template>
