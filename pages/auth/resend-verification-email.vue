@@ -16,5 +16,5 @@ definePageMeta({
 </script>
 
 <template>
-  <AuthForgotPasswordForm />
+  <AuthResendEmailVerificationForm />
 </template>
