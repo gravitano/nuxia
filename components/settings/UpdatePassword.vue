@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { useForm } from "vee-validate";
 import { toTypedSchema } from "@vee-validate/zod";
-import * as z from "zod";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -12,27 +11,45 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { updatePasswordSchema } from "~/shared/shemas/update-password";
+import { toast } from "vue-sonner";
+import { Loader } from "lucide-vue-next";
 
-const formSchema = z.object({
-  name: z.string().min(1, "Name is required"),
-  email: z.string().email("Invalid email address").min(1, "Email is required"),
+const { handleSubmit, isSubmitting, resetForm } = useForm({
+  validationSchema: toTypedSchema(updatePasswordSchema),
 });
 
-const { handleSubmit, isSubmitting } = useForm({
-  validationSchema: toTypedSchema(formSchema),
-});
+const isLoading = ref(false);
 
 const onSubmit = handleSubmit((values) => {
-  // Handle form submission
+  isLoading.value = true;
+
+  $fetch("/api/settings/password", {
+    method: "PUT",
+    body: JSON.stringify(values),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+    .then(() => {
+      toast.success("Password updated successfully");
+      resetForm();
+    })
+    .catch((error) => {
+      toast.error(
+        error.data?.message || "An error occurred while updating your password"
+      );
+    })
+    .finally(() => {
+      isLoading.value = false;
+    });
 });
 </script>
 
 <template>
   <div class="grid gap-4">
     <header>
-      <h3 class="mb-0.5 text-base font-medium">
-        Update password
-      </h3>
+      <h3 class="mb-0.5 text-base font-medium">Update password</h3>
       <p class="text-sm text-muted-foreground">
         Ensure your account is using a long, random password to stay secure
       </p>
@@ -82,7 +99,13 @@ const onSubmit = handleSubmit((values) => {
       </FormField>
 
       <div>
-        <Button type="submit" :disabled="isSubmitting"> Save Password </Button>
+        <Button type="submit" :disabled="isSubmitting || isLoading">
+          <Loader
+            v-if="isSubmitting || isLoading"
+            class="mr-2 h-4 w-4 animate-spin"
+          />
+          Save Password
+        </Button>
       </div>
     </form>
   </div>
