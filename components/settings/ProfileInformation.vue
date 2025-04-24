@@ -12,18 +12,47 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { Loader } from "lucide-vue-next";
+import { updateProfileSchema } from "~/shared/shemas/update-profile";
+import { toast } from "vue-sonner";
 
-const formSchema = z.object({
-  name: z.string().min(1, "Name is required"),
-  email: z.string().email("Invalid email address").min(1, "Email is required"),
-});
+const { isLoading } = defineProps<{
+  isLoading?: boolean;
+}>();
+
+const emit = defineEmits<{
+  submit: [values: ProfileInformationFormValues];
+}>();
+
+export type ProfileInformationFormValues = z.infer<typeof updateProfileSchema>;
+
+const { user, fetch: refreshSession } = useUserSession();
 
 const { handleSubmit, isSubmitting } = useForm({
-  validationSchema: toTypedSchema(formSchema),
+  validationSchema: toTypedSchema(updateProfileSchema),
+  initialValues: {
+    name: user.value?.name || "",
+    email: user.value?.email || "",
+  },
 });
 
 const onSubmit = handleSubmit((values) => {
-  // Handle form submission
+  $fetch("/api/settings/profile", {
+    method: "PUT",
+    body: JSON.stringify(values),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+    .then(() => {
+      toast.success("Profile updated successfully");
+      refreshSession();
+    })
+    .catch((error) => {
+      toast.error(
+        error.message || "An error occurred while updating your profile"
+      );
+    });
 });
 </script>
 
@@ -66,7 +95,14 @@ const onSubmit = handleSubmit((values) => {
       </FormField>
 
       <div>
-        <Button type="submit" :disabled="isSubmitting"> Save </Button>
+        <Button type="submit" :disabled="isSubmitting || isLoading">
+          <Loader
+            v-if="isSubmitting || isLoading"
+            class="mr-2 h-4 w-4 animate-spin"
+            stroke-width="3"
+          />
+          Save
+        </Button>
       </div>
     </form>
   </div>
