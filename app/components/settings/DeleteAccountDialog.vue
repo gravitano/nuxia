@@ -22,7 +22,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { deleteAccountSchema } from "~/shared/shemas/delete-account";
+import { deleteAccountSchema } from "#shared/shemas/delete-account";
 import { Loader } from "lucide-vue-next";
 
 const isOpen = defineModel<boolean>("open");

@@ -1,6 +1,6 @@
 // server/api/auth/register.ts
 import { defineEventHandler, readBody } from "h3";
-import { users } from "~/server/database/schema";
+import { users } from "~~/server/database/schema";
 
 export default defineEventHandler(async (event) => {
   const body = await readBody(event);

@@ -1,5 +1,5 @@
-import { users } from "~/server/database/schema";
-import { updatePasswordSchema } from "~/shared/shemas/update-password";
+import { users } from "~~/server/database/schema";
+import { updatePasswordSchema } from "#shared/shemas/update-password";
 
 export default defineEventHandler(async (event) => {
   // make sure the user is logged in

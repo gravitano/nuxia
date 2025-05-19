@@ -1,6 +1,6 @@
-import { defineEventHandler, readBody } from "h3";
+import { defineEventHandler } from "h3";
 import { z } from "zod";
-import { users } from "~/server/database/schema";
+import { users } from "~~/server/database/schema";
 
 // Validasi input pakai Zod
 const updateProfileSchema = z.object({

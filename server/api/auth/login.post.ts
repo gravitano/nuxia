@@ -1,6 +1,5 @@
 import { defineEventHandler, readBody } from "h3";
-import { generateAccessToken } from "~/server/utils/jwt";
-import { loginSchema } from "~/shared/shemas/login";
+import { loginSchema } from "#shared/shemas/login";
 
 export default defineEventHandler(async (event) => {
   const body = await readBody(event);

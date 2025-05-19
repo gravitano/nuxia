@@ -11,7 +11,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { updatePasswordSchema } from "~/shared/shemas/update-password";
+import { updatePasswordSchema } from "#shared/shemas/update-password";
 import { toast } from "vue-sonner";
 import { Loader } from "lucide-vue-next";
 

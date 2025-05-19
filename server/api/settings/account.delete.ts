@@ -1,5 +1,5 @@
-import { users } from "~/server/database/schema";
-import { deleteAccountSchema } from "~/shared/shemas/delete-account";
+import { users } from "~~/server/database/schema";
+import { deleteAccountSchema } from "#shared/shemas/delete-account";
 
 export default defineEventHandler(async (event) => {
   // make sure the user is logged in

@@ -13,7 +13,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Loader } from "lucide-vue-next";
-import { updateProfileSchema } from "~/shared/shemas/update-profile";
+import { updateProfileSchema } from "#shared/shemas/update-profile";
 import { toast } from "vue-sonner";
 
 const { isLoading } = defineProps<{

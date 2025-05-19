@@ -1,19 +1,8 @@
 <script setup lang="ts">
 import { useForm } from "vee-validate";
 import { toTypedSchema } from "@vee-validate/zod";
-import * as z from "zod";
-
-import { Button } from "@/components/ui/button";
-import {
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
 import type { AlertMessageProps } from "../alert/AlertMessage.vue";
-import { resetPasswordSchema } from "~/shared/shemas/reset-password";
+import { resetPasswordSchema } from "#shared/shemas/reset-password";
 import { Loader } from "lucide-vue-next";
 
 const route = useRoute();

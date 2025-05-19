@@ -1,7 +1,6 @@
-import { z } from "zod";
-import { randomBytes } from "crypto"; // Untuk token reset password
-import { passwordResetTokens, users } from "~/server/database/schema";
-import { resetPasswordSchema } from "~/shared/shemas/reset-password";
+import { randomBytes } from "crypto";
+import { resetPasswordSchema } from "#shared/shemas/reset-password";
+import { passwordResetTokens, users } from "~~/server/database/schema";
 
 export default defineEventHandler(async (event) => {
   const body = await readBody(event);
