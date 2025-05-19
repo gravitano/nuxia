@@ -1,5 +1,8 @@
 // server/utils/mailer.ts
+import { render } from "@vue-email/render";
 import nodemailer from "nodemailer";
+import ResetPasswordEmail from "../emails/ResetPasswordEmail.vue";
+import EmailVerificationEmail from "../emails/EmailVerificationEmail.vue";
 
 const runtimeConfig = useRuntimeConfig();
 
@@ -17,24 +20,44 @@ export function getMailFrom() {
   return `"${runtimeConfig.mailFromName}" <${runtimeConfig.mailUsername}>`;
 }
 
-export function sendResetPasswordEmail(to: string, token: string) {
+export async function sendResetPasswordEmail(to: string, token: string) {
   const link = `${runtimeConfig.appUrl}/auth/reset-password?token=${token}`;
+  const html = await render(
+    ResetPasswordEmail,
+    {
+      name: "User",
+      resetUrl: link,
+    },
+    {
+      pretty: true,
+    }
+  );
 
   return transporter.sendMail({
     from: getMailFrom(),
     to,
     subject: "Reset Password",
-    html: `<p>Klik link ini untuk reset password:</p><p><a href="${link}">${link}</a></p>`,
+    html,
   });
 }
 
-export function sendEmailVerificationEmail(to: string, token: string) {
+export async function sendEmailVerificationEmail(to: string, token: string) {
   const link = `${runtimeConfig.appUrl}/api/verify-email?token=${token}`;
-
+  const html = await render(
+    EmailVerificationEmail,
+    {
+      name: "User",
+      verifyUrl: link,
+    },
+    {
+      pretty: true,
+    }
+  );
+  
   return transporter.sendMail({
     from: getMailFrom(),
     to,
     subject: "Verifikasi Email",
-    html: `<p>Klik link ini untuk verifikasi email:</p><p><a href="${link}">${link}</a></p>`,
+    html,
   });
 }

@@ -1,4 +1,5 @@
 import tailwindcss from "@tailwindcss/vite";
+import vue from '@vitejs/plugin-vue'
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
@@ -56,6 +57,9 @@ export default defineNuxtConfig({
   nitro: {
     experimental: {
       tasks: true,
+    },
+    rollupConfig: {
+      plugins: [vue()]
     },
   },
 
