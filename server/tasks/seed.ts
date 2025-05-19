@@ -10,6 +10,9 @@ export default defineTask({
       {
         id: 1,
         name: "John Doe",
+        email: "john@example.com",
+        password: await hashPassword("secret123"),
+        emailVerifiedAt: new Date(),
       },
     ]);
 

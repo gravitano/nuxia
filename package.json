@@ -10,6 +10,7 @@
     "postinstall": "nuxt prepare",
     "db:generate": "drizzle-kit generate",
     "db:push": "drizzle-kit push",
+    "migrate": "drizzle-kit push",
     "db:seed": "nitro task run db:seed"
   },
   "dependencies": {

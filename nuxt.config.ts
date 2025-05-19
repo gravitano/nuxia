@@ -55,4 +55,14 @@ export default defineNuxtConfig({
       tasks: true,
     },
   },
+
+  runtimeConfig: {
+    mailHost: '',
+    mailPort: 587,
+    mailSecure: false,
+    mailUsername: '',
+    mailPassword: '',
+    mailFromName: 'Warsono',
+    mailFromEmail: 'warsono16694@gmail.com'
+  }
 });
