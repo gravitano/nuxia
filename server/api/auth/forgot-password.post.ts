@@ -2,6 +2,7 @@
 import { defineEventHandler, readBody } from "h3";
 import { randomBytes } from "node:crypto";
 import { passwordResetTokens } from "~~/server/database/schema";
+import { sendResetPasswordEmailWorker } from "~~/workers/email-worker";
 
 export default defineEventHandler(async (event) => {
   const body = await readBody(event);
@@ -20,9 +21,10 @@ export default defineEventHandler(async (event) => {
   });
 
   if (!user) {
+    console.log("User not found");
     return {
-      data: false,
-      message: "User not found",
+      data: true,
+      message: "Reset link has been sent to your email",
     };
   }
 
@@ -35,8 +37,8 @@ export default defineEventHandler(async (event) => {
     token,
   });
 
-  // Kirim email
-  await sendResetPasswordEmail(email, token);
+  // Kirim email via worker
+  sendResetPasswordEmailWorker(email, token);
 
   return {
     data: true,

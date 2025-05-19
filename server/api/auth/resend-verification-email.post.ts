@@ -1,5 +1,5 @@
-// server/api/auth/forgot-password.ts
 import { defineEventHandler, readBody } from "h3";
+import { sendEmailVerificationEmailWorker } from "~~/workers/email-worker";
 
 export default defineEventHandler(async (event) => {
   const body = await readBody(event);
@@ -19,8 +19,8 @@ export default defineEventHandler(async (event) => {
 
   if (!user) {
     return {
-      data: false,
-      message: "User not found",
+      data: true,
+      message: "Verification email sent",
     };
   }
 
@@ -31,7 +31,8 @@ export default defineEventHandler(async (event) => {
     expires: Date.now() + 60 * 1000, // 1 minute
   });
 
-  await sendEmailVerificationEmail(user.email, token);
+  // send email verification via worker
+  sendEmailVerificationEmailWorker(user.email, token);
 
   return {
     data: true,

@@ -19,6 +19,7 @@ export default defineNuxtConfig({
     "shadcn-nuxt",
     "@nuxtjs/color-mode",
     "nuxt-auth-utils",
+    "nuxt-workers"
   ],
 
   css: ["~/assets/css/tailwind.css"],
