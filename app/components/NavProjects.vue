@@ -1,12 +1,19 @@
 <script setup lang="ts">
 import {
+  Folder,
+  Forward,
+  type LucideIcon,
+  MoreHorizontal,
+  Trash2,
+} from 'lucide-vue-next'
+
+import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
-
 import {
   SidebarGroup,
   SidebarGroupLabel,
@@ -16,13 +23,6 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from '@/components/ui/sidebar'
-import {
-  Folder,
-  Forward,
-  type LucideIcon,
-  MoreHorizontal,
-  Trash2,
-} from 'lucide-vue-next'
 
 defineProps<{
   projects: {
@@ -74,9 +74,7 @@ const { isMobile } = useSidebar()
           </DropdownMenuContent>
         </DropdownMenu>
       </SidebarMenuItem>
-      <SidebarMenuItem
-        v-if="projects.length > 0"
-      >
+      <SidebarMenuItem>
         <SidebarMenuButton class="text-sidebar-foreground/70">
           <MoreHorizontal class="text-sidebar-foreground/70" />
           <span>More</span>

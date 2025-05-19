@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { ChevronRight, type LucideIcon } from 'lucide-vue-next'
 import {
   Collapsible,
   CollapsibleContent,
@@ -14,7 +15,6 @@ import {
   SidebarMenuSubButton,
   SidebarMenuSubItem,
 } from '@/components/ui/sidebar'
-import { ChevronRight, type LucideIcon } from 'lucide-vue-next'
 
 defineProps<{
   items: {
@@ -34,34 +34,46 @@ defineProps<{
   <SidebarGroup>
     <SidebarGroupLabel>Platform</SidebarGroupLabel>
     <SidebarMenu>
-      <Collapsible
-        v-for="item in items"
-        :key="item.title"
-        as-child
-        :default-open="item.isActive"
-        class="group/collapsible"
+      <template
+          v-for="item in items"
+          :key="item.title"
       >
-        <SidebarMenuItem>
-          <CollapsibleTrigger as-child>
-            <SidebarMenuButton :tooltip="item.title">
-              <component :is="item.icon" v-if="item.icon" />
+        <Collapsible
+          v-if="item.items"
+          as-child
+          :default-open="item.isActive"
+          class="group/collapsible"
+        >
+          <SidebarMenuItem>
+            <CollapsibleTrigger as-child>
+              <SidebarMenuButton :tooltip="item.title">
+                <component :is="item.icon" v-if="item.icon" />
+                <span>{{ item.title }}</span>
+                <ChevronRight class="ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" />
+              </SidebarMenuButton>
+            </CollapsibleTrigger>
+            <CollapsibleContent>
+              <SidebarMenuSub>
+                <SidebarMenuSubItem v-for="subItem in item.items" :key="subItem.title">
+                  <SidebarMenuSubButton as-child>
+                    <a :href="subItem.url">
+                      <span>{{ subItem.title }}</span>
+                    </a>
+                  </SidebarMenuSubButton>
+                </SidebarMenuSubItem>
+              </SidebarMenuSub>
+            </CollapsibleContent>
+          </SidebarMenuItem>
+        </Collapsible>
+        <SidebarMenuItem v-else :key="item.title">
+          <SidebarMenuButton as-child :tooltip="item.title">
+            <NuxtLink :to="item.url">
+              <component :is="item.icon" />
               <span>{{ item.title }}</span>
-              <ChevronRight class="ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" />
-            </SidebarMenuButton>
-          </CollapsibleTrigger>
-          <CollapsibleContent>
-            <SidebarMenuSub>
-              <SidebarMenuSubItem v-for="subItem in item.items" :key="subItem.title">
-                <SidebarMenuSubButton as-child>
-                  <a :href="subItem.url">
-                    <span>{{ subItem.title }}</span>
-                  </a>
-                </SidebarMenuSubButton>
-              </SidebarMenuSubItem>
-            </SidebarMenuSub>
-          </CollapsibleContent>
+            </NuxtLink>
+          </SidebarMenuButton>
         </SidebarMenuItem>
-      </Collapsible>
+      </template>
     </SidebarMenu>
   </SidebarGroup>
 </template>

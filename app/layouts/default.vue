@@ -31,9 +31,7 @@ const hasBreadcrumbs = computed(() => {
   <SidebarProvider>
     <AppSidebar variant="inset" />
     <SidebarInset>
-      <header
-        class="flex h-16 shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-12"
-      >
+      <header class="flex h-16 shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-12">
         <div class="flex items-center gap-2 px-4">
           <SidebarTrigger class="-ml-1" />
           <Separator
@@ -61,7 +59,6 @@ const hasBreadcrumbs = computed(() => {
           </Breadcrumb>
         </div>
       </header>
-      <!-- content -->
       <slot />
     </SidebarInset>
   </SidebarProvider>

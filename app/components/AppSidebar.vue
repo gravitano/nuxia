@@ -1,17 +1,5 @@
 <script setup lang="ts">
-import type { SidebarProps } from "@/components/ui/sidebar";
-
-import NavMain from "@/components/NavMain.vue";
-import NavProjects from "@/components/NavProjects.vue";
-import NavUser from "@/components/NavUser.vue";
-import TeamSwitcher from "@/components/TeamSwitcher.vue";
-import {
-  Sidebar,
-  SidebarContent,
-  SidebarFooter,
-  SidebarHeader,
-  SidebarRail,
-} from "@/components/ui/sidebar";
+import type { SidebarProps } from '@/components/ui/sidebar'
 
 import {
   AudioWaveform,
@@ -25,81 +13,90 @@ import {
   PieChart,
   Settings2,
   SquareTerminal,
-} from "lucide-vue-next";
+} from 'lucide-vue-next'
+import NavMain from '@/components/NavMain.vue'
+import NavProjects from '@/components/NavProjects.vue'
+import NavUser from '@/components/NavUser.vue'
+import TeamSwitcher from '@/components/TeamSwitcher.vue'
+
+import {
+  Sidebar,
+  SidebarContent,
+  SidebarFooter,
+  SidebarHeader,
+  SidebarRail,
+} from '@/components/ui/sidebar'
 
 const props = withDefaults(defineProps<SidebarProps>(), {
-  collapsible: "icon",
-});
+  collapsible: 'icon',
+})
 
-const { user } = useUserSession();
-const userData = computed(() => {
-  return {
-    id: user.value?.id!,
-    name: user.value?.name!,
-    email: user.value?.email!,
-    avatar: "https://avatars.githubusercontent.com/u/5087538?v=4",
-  };
-});
+const {user} = useUserSession()
 
 // This is sample data.
 const data = {
+  user: {
+    name: user.value?.name || 'Shad CN',
+    email: user.value?.email || 'noemail',
+    avatar: '/avatars/shadcn.jpg',
+  },
   teams: [
     {
-      name: "Acme Inc",
+      name: 'Acme Inc',
       logo: GalleryVerticalEnd,
-      plan: "Enterprise",
+      plan: 'Enterprise',
     },
     {
-      name: "Acme Corp.",
+      name: 'Acme Corp.',
       logo: AudioWaveform,
-      plan: "Startup",
+      plan: 'Startup',
     },
     {
-      name: "Evil Corp.",
+      name: 'Evil Corp.',
       logo: Command,
-      plan: "Free",
+      plan: 'Free',
     },
   ],
   navMain: [
-    // {
-    //   title: 'Dashboard',
-    //   url: '#',
-    //   icon: LayoutDashboard,
-    //   isActive: true,
-    //   items: [
-    //     // {
-    //     //   title: 'Dashboard',
-    //     //   url: '/dashboard',
-    //     // },
-    //     // {
-    //     //   title: 'Starred',
-    //     //   url: '#',
-    //     // },
-    //     // {
-    //     //   title: 'Settings',
-    //     //   url: '#',
-    //     // },
-    //   ],
-    // },
-    // {
-    //   title: 'Models',
-    //   url: '#',
-    //   icon: Bot,
-    //   items: [
-    //     {
-    //       title: 'Genesis',
-    //       url: '#',
-    //     },
-    //     {
-    //       title: 'Explorer',
-    //       url: '#',
-    //     },
-    //     {
-    //       title: 'Quantum',
-    //       url: '#',
-    //     },
-    //   ],
-    // },
+    {
+      title: 'Dashboard',
+      url: '/dashboard',
+      icon: LayoutDashboard,
+      // isActive: true,
+      // items: [
+      //   {
+      //     title: 'History',
+      //     url: '#',
+      //   },
+      //   {
+      //     title: 'Starred',
+      //     url: '#',
+      //   },
+      //   {
+      //     title: 'Settings',
+      //     url: '#',
+      //   },
+      // ],
+    },
+    {
+      title: 'Models',
+      url: '#',
+      icon: Bot,
+      items: [
+        {
+          title: 'Genesis',
+          url: '#',
+        },
+        {
+          title: 'Explorer',
+          url: '#',
+        },
+        {
+          title: 'Quantum',
+          url: '#',
+        },
+      ],
+    },
     // {
     //   title: 'Documentation',
     //   url: '#',
@@ -148,30 +145,23 @@ const data = {
     // },
   ],
   projects: [
-    // {
-    //   name: 'Design Engineering',
-    //   url: '#',
-    //   icon: Frame,
-    // },
-    // {
-    //   name: 'Sales & Marketing',
-    //   url: '#',
-    //   icon: PieChart,
-    // },
-    // {
-    //   name: 'Travel',
-    //   url: '#',
-    //   icon: Map,
-    // },
-  ],
-  navSimple: [
     {
-      name: "Dashboard",
-      url: "/dashboard",
-      icon: LayoutDashboard,
+      name: 'Design Engineering',
+      url: '#',
+      icon: Frame,
+    },
+    {
+      name: 'Sales & Marketing',
+      url: '#',
+      icon: PieChart,
+    },
+    {
+      name: 'Travel',
+      url: '#',
+      icon: Map,
     },
   ],
-};
+}
 </script>
 
 <template>
@@ -180,12 +170,11 @@ const data = {
       <TeamSwitcher :teams="data.teams" />
     </SidebarHeader>
     <SidebarContent>
-      <NavSimple :items="data.navSimple" />
-      <!-- <NavMain :items="data.navMain" /> -->
+      <NavMain :items="data.navMain" />
       <!-- <NavProjects :projects="data.projects" /> -->
     </SidebarContent>
     <SidebarFooter>
-      <NavUser :user="userData" />
+      <NavUser :user="data.user" />
     </SidebarFooter>
     <SidebarRail />
   </Sidebar>
