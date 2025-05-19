@@ -18,7 +18,7 @@ export function getMailFrom() {
 }
 
 export function sendResetPasswordEmail(to: string, token: string) {
-  const link = `http://localhost:3000/auth/reset-password?token=${token}`;
+  const link = `${runtimeConfig.appUrl}/auth/reset-password?token=${token}`;
 
   return transporter.sendMail({
     from: getMailFrom(),
@@ -29,7 +29,7 @@ export function sendResetPasswordEmail(to: string, token: string) {
 }
 
 export function sendEmailVerificationEmail(to: string, token: string) {
-  const link = `http://localhost:3000/api/verify-email?token=${token}`;
+  const link = `${runtimeConfig.appUrl}/api/verify-email?token=${token}`;
 
   return transporter.sendMail({
     from: getMailFrom(),

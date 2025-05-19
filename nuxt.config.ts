@@ -60,6 +60,7 @@ export default defineNuxtConfig({
   },
 
   runtimeConfig: {
+    appUrl: 'http://localhost:3000',
     mailHost: '',
     mailPort: 587,
     mailSecure: false,
