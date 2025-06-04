@@ -2,7 +2,7 @@
 
 **Nuxia** is a fullstack starter template for [Nuxt](https://nuxt.com), built to help you ship fast with clean and minimal setup. Whether you're building an MVP, dashboard, or internal tool — Nuxia gives you a powerful starting point.
 
-![Nuxt.js](https://img.shields.io/badge/Nuxt%203-Fullstack-00DC82?logo=nuxtdotjs&style=flat-square)
+![Nuxt.js](https://img.shields.io/badge/Nuxia-00DC82?logo=nuxtdotjs&style=flat-square)
 ![License](https://img.shields.io/github/license/gravitano/nuxia?style=flat-square)
 ![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)
 
