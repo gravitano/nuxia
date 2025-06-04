@@ -3,34 +3,14 @@ definePageMeta({
   layout: "blank",
 });
 
-useHead({
-  title: "Nuxt Starter Kit",
-  meta: [
-    {
-      name: "description",
-      content: "Nuxt Starter Kit",
-    },
-  ],
-});
+const appConfig = useAppConfig();
 
-const stack = [
-  {
-    name: "Nuxt",
-    description: "The Progressive Web Framework",
-  },
-  {
-    name: "Tailwind CSS",
-    description: "",
-  },
-  {
-    name: "Shadcn Vue",
-    description: "",
-  },
-  {
-    name: "Dark Mode",
-    description: "",
-  },
-];
+useSeoMeta({
+  title: appConfig.app.name,
+  description: appConfig.app.description,
+  ogTitle: appConfig.app.name,
+  ogDescription: appConfig.app.description,
+});
 
 const { loggedIn } = useUserSession();
 </script>
