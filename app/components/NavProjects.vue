@@ -1,8 +1,9 @@
 <script setup lang="ts">
+import type { LucideIcon } from 'lucide-vue-next'
 import {
   Folder,
   Forward,
-  type LucideIcon,
+
   MoreHorizontal,
   Trash2,
 } from 'lucide-vue-next'

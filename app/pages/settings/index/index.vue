@@ -1,6 +1,6 @@
 <script setup lang="ts">
 onMounted(() => {
-    navigateTo('/settings/profile')
+  navigateTo('/settings/profile')
 })
 </script>
 

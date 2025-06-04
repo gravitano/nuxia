@@ -1,18 +1,18 @@
 <script setup lang="ts">
 const menus = [
   {
-    label: "Profile",
-    to: "/settings/profile",
+    label: 'Profile',
+    to: '/settings/profile',
   },
   {
-    label: "Password",
-    to: "/settings/password",
+    label: 'Password',
+    to: '/settings/password',
   },
   {
-    label: "Appearance",
-    to: "/settings/appearance",
+    label: 'Appearance',
+    to: '/settings/appearance',
   },
-];
+]
 </script>
 
 <template>

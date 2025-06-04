@@ -1,55 +1,57 @@
 <script setup lang="ts">
-import { useForm } from "vee-validate";
-import { toTypedSchema } from "@vee-validate/zod";
+import { updatePasswordSchema } from '#shared/shemas/update-password'
+import { toTypedSchema } from '@vee-validate/zod'
 
-import { Button } from "@/components/ui/button";
+import { Loader } from 'lucide-vue-next'
+import { useForm } from 'vee-validate'
+import { toast } from 'vue-sonner'
+import { Button } from '@/components/ui/button'
 import {
   FormControl,
   FormField,
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { updatePasswordSchema } from "#shared/shemas/update-password";
-import { toast } from "vue-sonner";
-import { Loader } from "lucide-vue-next";
+} from '@/components/ui/form'
+import { Input } from '@/components/ui/input'
 
 const { handleSubmit, isSubmitting, resetForm } = useForm({
   validationSchema: toTypedSchema(updatePasswordSchema),
-});
+})
 
-const isLoading = ref(false);
+const isLoading = ref(false)
 
 const onSubmit = handleSubmit((values) => {
-  isLoading.value = true;
+  isLoading.value = true
 
-  $fetch("/api/settings/password", {
-    method: "PUT",
+  $fetch('/api/settings/password', {
+    method: 'PUT',
     body: JSON.stringify(values),
     headers: {
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
     },
   })
     .then(() => {
-      toast.success("Password updated successfully");
-      resetForm();
+      toast.success('Password updated successfully')
+      resetForm()
     })
     .catch((error) => {
       toast.error(
-        error.data?.message || "An error occurred while updating your password"
-      );
+        error.data?.message || 'An error occurred while updating your password',
+      )
     })
     .finally(() => {
-      isLoading.value = false;
-    });
-});
+      isLoading.value = false
+    })
+})
 </script>
 
 <template>
   <div class="grid gap-4">
     <header>
-      <h3 class="mb-0.5 text-base font-medium">Update password</h3>
+      <h3 class="mb-0.5 text-base font-medium">
+        Update password
+      </h3>
       <p class="text-sm text-muted-foreground">
         Ensure your account is using a long, random password to stay secure
       </p>

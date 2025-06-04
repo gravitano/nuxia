@@ -1,19 +1,19 @@
 <script setup lang="ts">
 import {
-  Html,
-  Head,
-  Font,
-  Tailwind,
-  Container,
-  Text,
   Button,
+  Container,
+  Font,
+  Head,
+  Html,
   Section,
-} from "@vue-email/components";
+  Tailwind,
+  Text,
+} from '@vue-email/components'
 
 defineProps<{
-  name: string;
-  resetUrl: string;
-}>();
+  name: string
+  resetUrl: string
+}>()
 </script>
 
 <template>
@@ -47,7 +47,9 @@ defineProps<{
       </Head>
       <Section class="bg-gray-100 py-10 px-5 font-sans">
         <Container class="bg-white max-w-xl mx-auto p-6 rounded-lg shadow">
-          <Text class="text-sm text-gray-500 mb-4">Hello {{ name }},</Text>
+          <Text class="text-sm text-gray-500 mb-4">
+            Hello {{ name }},
+          </Text>
 
           <Text class="text-text text-base mb-6">
             You recently requested to reset your password. Click the button

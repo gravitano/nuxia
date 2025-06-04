@@ -1,59 +1,61 @@
 <script setup lang="ts">
-import { useForm } from "vee-validate";
-import { toTypedSchema } from "@vee-validate/zod";
-import type { AlertMessageProps } from "../alert/AlertMessage.vue";
-import { resetPasswordSchema } from "#shared/shemas/reset-password";
-import { Loader } from "lucide-vue-next";
+import type { AlertMessageProps } from '../alert/AlertMessage.vue'
+import { resetPasswordSchema } from '#shared/shemas/reset-password'
+import { toTypedSchema } from '@vee-validate/zod'
+import { Loader } from 'lucide-vue-next'
+import { useForm } from 'vee-validate'
 
-const route = useRoute();
-const token = route.query.token as string;
+const route = useRoute()
+const token = route.query.token as string
 
 const { handleSubmit, isSubmitting, resetForm } = useForm({
   validationSchema: toTypedSchema(resetPasswordSchema),
-});
+})
 
-const isLoading = ref(false);
+const isLoading = ref(false)
 const alert = reactive<AlertMessageProps>({
-  description: "",
-  variant: "info",
-});
+  description: '',
+  variant: 'info',
+})
 
 const onSubmit = handleSubmit((values) => {
-  isLoading.value = true;
-  alert.description = "";
+  isLoading.value = true
+  alert.description = ''
 
-  $fetch("/api/auth/reset-password", {
-    method: "POST",
+  $fetch('/api/auth/reset-password', {
+    method: 'POST',
     body: JSON.stringify({
       ...values,
       token,
     }),
     headers: {
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
     },
   })
     .then(() => {
-      alert.description = "Password reset successfully";
-      alert.variant = "success";
-      resetForm();
-      navigateTo("/auth/login");
+      alert.description = 'Password reset successfully'
+      alert.variant = 'success'
+      resetForm()
+      navigateTo('/auth/login')
     })
     .catch((error) => {
-      alert.description =
-        error.data?.message || "An error occurred. Please try again.";
-      alert.variant = "error";
+      alert.description
+        = error.data?.message || 'An error occurred. Please try again.'
+      alert.variant = 'error'
     })
     .finally(() => {
-      isLoading.value = false;
-    });
-});
+      isLoading.value = false
+    })
+})
 </script>
 
 <template>
   <form class="w-full max-w-sm" @submit="onSubmit">
     <Card>
       <CardHeader>
-        <CardTitle class="text-2xl"> Reset Password </CardTitle>
+        <CardTitle class="text-2xl">
+          Reset Password
+        </CardTitle>
         <CardDescription>
           Enter your current password and new password below to reset your
           password
@@ -120,7 +122,9 @@ const onSubmit = handleSubmit((values) => {
         </div>
         <div class="mt-4 text-center text-sm">
           Or, return to
-          <NuxtLink to="/auth/login" class="underline"> Sign in </NuxtLink>
+          <NuxtLink to="/auth/login" class="underline">
+            Sign in
+          </NuxtLink>
         </div>
       </CardContent>
     </Card>

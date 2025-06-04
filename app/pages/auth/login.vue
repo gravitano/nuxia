@@ -1,50 +1,49 @@
 <script setup lang="ts">
-import { toast } from "vue-sonner";
-import type { LoginFormValues } from "~/components/auth/LoginForm.vue";
+import type { LoginFormValues } from '~/components/auth/LoginForm.vue'
 
 useHead({
-  title: "Login",
+  title: 'Login',
   meta: [
     {
-      name: "description",
-      content: "Login page for the application.",
+      name: 'description',
+      content: 'Login page for the application.',
     },
   ],
-});
+})
 
 definePageMeta({
-  layout: "auth",
-  middleware: "guest",
-});
+  layout: 'auth',
+  middleware: 'guest',
+})
 
-const { fetch: refreshSession } = useUserSession();
+const { fetch: refreshSession } = useUserSession()
 
-const isLoading = ref(false);
-const error = ref<string>();
+const isLoading = ref(false)
+const error = ref<string>()
 
 function onSubmit(values: LoginFormValues) {
-  isLoading.value = true;
-  error.value = undefined;
+  isLoading.value = true
+  error.value = undefined
 
-  $fetch("/api/auth/login", {
-    method: "POST",
+  $fetch('/api/auth/login', {
+    method: 'POST',
     body: JSON.stringify(values),
     headers: {
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
     },
   })
     .then(async () => {
-      await refreshSession();
-      navigateTo("/dashboard");
+      await refreshSession()
+      navigateTo('/dashboard')
     })
     .catch((err) => {
-      error.value =
-        err.data?.message ||
-        "An error occurred while logging in. Please try again.";
+      error.value
+        = err.data?.message
+          || 'An error occurred while logging in. Please try again.'
     })
     .finally(() => {
-      isLoading.value = false;
-    });
+      isLoading.value = false
+    })
 }
 </script>
 

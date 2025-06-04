@@ -1,18 +1,18 @@
 <script setup lang="ts">
 useHead({
-  title: "Resend Verification Email",
+  title: 'Resend Verification Email',
   meta: [
     {
-      name: "description",
-      content: "Resend Verification Email",
+      name: 'description',
+      content: 'Resend Verification Email',
     },
   ],
-});
+})
 
 definePageMeta({
-  layout: "auth",
-  middleware: "guest",
-});
+  layout: 'auth',
+  middleware: 'guest',
+})
 </script>
 
 <template>

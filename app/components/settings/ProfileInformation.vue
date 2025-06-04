@@ -1,65 +1,67 @@
 <script setup lang="ts">
-import { useForm } from "vee-validate";
-import { toTypedSchema } from "@vee-validate/zod";
-import * as z from "zod";
+import type * as z from 'zod'
+import { updateProfileSchema } from '#shared/shemas/update-profile'
+import { toTypedSchema } from '@vee-validate/zod'
 
-import { Button } from "@/components/ui/button";
+import { Loader } from 'lucide-vue-next'
+import { useForm } from 'vee-validate'
+import { toast } from 'vue-sonner'
+import { Button } from '@/components/ui/button'
 import {
   FormControl,
   FormField,
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { Loader } from "lucide-vue-next";
-import { updateProfileSchema } from "#shared/shemas/update-profile";
-import { toast } from "vue-sonner";
+} from '@/components/ui/form'
+import { Input } from '@/components/ui/input'
 
 const { isLoading } = defineProps<{
-  isLoading?: boolean;
-}>();
+  isLoading?: boolean
+}>()
 
-const emit = defineEmits<{
-  submit: [values: ProfileInformationFormValues];
-}>();
+defineEmits<{
+  submit: [values: ProfileInformationFormValues]
+}>()
 
-export type ProfileInformationFormValues = z.infer<typeof updateProfileSchema>;
+export type ProfileInformationFormValues = z.infer<typeof updateProfileSchema>
 
-const { user, fetch: refreshSession } = useUserSession();
+const { user, fetch: refreshSession } = useUserSession()
 
 const { handleSubmit, isSubmitting } = useForm({
   validationSchema: toTypedSchema(updateProfileSchema),
   initialValues: {
-    name: user.value?.name || "",
-    email: user.value?.email || "",
+    name: user.value?.name || '',
+    email: user.value?.email || '',
   },
-});
+})
 
 const onSubmit = handleSubmit((values) => {
-  $fetch("/api/settings/profile", {
-    method: "PUT",
+  $fetch('/api/settings/profile', {
+    method: 'PUT',
     body: JSON.stringify(values),
     headers: {
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
     },
   })
     .then(() => {
-      toast.success("Profile updated successfully");
-      refreshSession();
+      toast.success('Profile updated successfully')
+      refreshSession()
     })
     .catch((error) => {
       toast.error(
-        error.message || "An error occurred while updating your profile"
-      );
-    });
-});
+        error.message || 'An error occurred while updating your profile',
+      )
+    })
+})
 </script>
 
 <template>
   <div class="grid gap-4">
     <header>
-      <h3 class="mb-0.5 text-base font-medium">Profile information</h3>
+      <h3 class="mb-0.5 text-base font-medium">
+        Profile information
+      </h3>
       <p class="text-sm text-muted-foreground">
         Update your name and email address
       </p>

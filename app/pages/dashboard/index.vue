@@ -1,17 +1,17 @@
 <script setup lang="ts">
 definePageMeta({
-  middleware: ["auth"],
+  middleware: ['auth'],
   breadcrumbs: [
     {
-      text: "Dashboard",
-      href: "/dashboard",
+      text: 'Dashboard',
+      href: '/dashboard',
     },
   ],
-});
+})
 
 useHead({
-  title: "Dashboard",
-});
+  title: 'Dashboard',
+})
 </script>
 
 <template>

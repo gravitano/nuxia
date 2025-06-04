@@ -1,50 +1,52 @@
 <script setup lang="ts">
-import { useForm } from "vee-validate";
-import { toTypedSchema } from "@vee-validate/zod";
-import * as z from "zod";
+import { toTypedSchema } from '@vee-validate/zod'
+import { Loader } from 'lucide-vue-next'
+import { useForm } from 'vee-validate'
 
-import { Button } from "@/components/ui/button";
+import * as z from 'zod'
+import { Button } from '@/components/ui/button'
 import {
   FormControl,
   FormField,
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { Loader } from "lucide-vue-next";
+} from '@/components/ui/form'
+import { Input } from '@/components/ui/input'
 
 const { isLoading } = defineProps<{
-  isLoading?: boolean;
-  error?: string;
-}>();
+  isLoading?: boolean
+  error?: string
+}>()
 
 const emit = defineEmits<{
-  submit: [values: RegisterFormValues];
-}>();
+  submit: [values: RegisterFormValues]
+}>()
 
 const formSchema = z.object({
-  name: z.string().min(1, "Name is required"),
-  email: z.string().min(1, "Email is required").email("Invalid email address"),
+  name: z.string().min(1, 'Name is required'),
+  email: z.string().min(1, 'Email is required').email('Invalid email address'),
   password: z.string(),
-});
+})
 
-export type RegisterFormValues = z.infer<typeof formSchema>;
+export type RegisterFormValues = z.infer<typeof formSchema>
 
 const { handleSubmit, isSubmitting } = useForm({
   validationSchema: toTypedSchema(formSchema),
-});
+})
 
 const onSubmit = handleSubmit((values) => {
-  emit("submit", values);
-});
+  emit('submit', values)
+})
 </script>
 
 <template>
   <form class="w-full max-w-sm" @submit="onSubmit">
     <Card>
       <CardHeader>
-        <CardTitle class="text-xl"> Sign Up </CardTitle>
+        <CardTitle class="text-xl">
+          Sign Up
+        </CardTitle>
         <CardDescription>
           Enter your information to create an account
         </CardDescription>
@@ -107,7 +109,9 @@ const onSubmit = handleSubmit((values) => {
         </div>
         <div class="mt-4 text-center text-sm">
           Already have an account?
-          <NuxtLink to="/auth/login" class="underline"> Sign in </NuxtLink>
+          <NuxtLink to="/auth/login" class="underline">
+            Sign in
+          </NuxtLink>
         </div>
       </CardContent>
     </Card>

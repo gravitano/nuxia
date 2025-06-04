@@ -1,68 +1,70 @@
 <script setup lang="ts">
-import { useForm } from "vee-validate";
-import { toTypedSchema } from "@vee-validate/zod";
-import * as z from "zod";
+import type { AlertMessageProps } from '../alert/AlertMessage.vue'
+import { toTypedSchema } from '@vee-validate/zod'
+import { Loader } from 'lucide-vue-next'
 
-import { Button } from "@/components/ui/button";
+import { useForm } from 'vee-validate'
+import * as z from 'zod'
+import { Button } from '@/components/ui/button'
 import {
   FormControl,
   FormField,
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import type { AlertMessageProps } from "../alert/AlertMessage.vue";
-import { Loader } from "lucide-vue-next";
+} from '@/components/ui/form'
+import { Input } from '@/components/ui/input'
 
 const formSchema = z.object({
-  email: z.string().email("Invalid email address").min(1, "Email is required"),
-});
+  email: z.string().email('Invalid email address').min(1, 'Email is required'),
+})
 
-export type LoginFormValues = z.infer<typeof formSchema>;
+export type LoginFormValues = z.infer<typeof formSchema>
 
 const { handleSubmit, isSubmitting, resetForm } = useForm({
   validationSchema: toTypedSchema(formSchema),
-});
+})
 
-const isLoading = ref(false);
+const isLoading = ref(false)
 const alert = reactive<AlertMessageProps>({
-  description: "",
-  variant: "info",
-});
+  description: '',
+  variant: 'info',
+})
 
 const onSubmit = handleSubmit((values) => {
-  isLoading.value = true;
-  alert.description = "";
+  isLoading.value = true
+  alert.description = ''
 
-  $fetch("/api/auth/forgot-password", {
-    method: "POST",
+  $fetch('/api/auth/forgot-password', {
+    method: 'POST',
     body: JSON.stringify(values),
     headers: {
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
     },
   })
     .then(() => {
-      alert.description = "Password reset link sent to your email";
-      alert.variant = "success";
-      resetForm();
+      alert.description = 'Password reset link sent to your email'
+      alert.variant = 'success'
+      resetForm()
     })
     .catch((error) => {
-      alert.description =
-        error.data?.message || "An error occurred. Please try again.";
-      alert.variant = "error";
+      alert.description
+        = error.data?.message || 'An error occurred. Please try again.'
+      alert.variant = 'error'
     })
     .finally(() => {
-      isLoading.value = false;
-    });
-});
+      isLoading.value = false
+    })
+})
 </script>
 
 <template>
   <form class="w-full max-w-sm" @submit="onSubmit">
     <Card>
       <CardHeader>
-        <CardTitle class="text-2xl"> Forgot Password </CardTitle>
+        <CardTitle class="text-2xl">
+          Forgot Password
+        </CardTitle>
         <CardDescription>
           Enter your email below to reset your password
         </CardDescription>
@@ -100,7 +102,9 @@ const onSubmit = handleSubmit((values) => {
         </div>
         <div class="mt-4 text-center text-sm">
           Or, return to
-          <NuxtLink to="/auth/login" class="underline"> Sign in </NuxtLink>
+          <NuxtLink to="/auth/login" class="underline">
+            Sign in
+          </NuxtLink>
         </div>
       </CardContent>
     </Card>

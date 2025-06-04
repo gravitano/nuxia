@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import AppSidebar from "@/components/AppSidebar.vue";
+import AppSidebar from '@/components/AppSidebar.vue'
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -7,24 +7,24 @@ import {
   BreadcrumbList,
   BreadcrumbPage,
   BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb";
-import { Separator } from "@/components/ui/separator";
+} from '@/components/ui/breadcrumb'
+import { Separator } from '@/components/ui/separator'
 import {
   SidebarInset,
   SidebarProvider,
   SidebarTrigger,
-} from "@/components/ui/sidebar";
+} from '@/components/ui/sidebar'
 
-const route = useRoute();
+const route = useRoute()
 const breadcrumbs = computed(() => {
   return (route.meta?.breadcrumbs ?? []) as Array<{
-    text: string;
-    href: string;
-  }>;
-});
+    text: string
+    href: string
+  }>
+})
 const hasBreadcrumbs = computed(() => {
-  return breadcrumbs.value.length > 0;
-});
+  return breadcrumbs.value.length > 0
+})
 </script>
 
 <template>
@@ -51,8 +51,8 @@ const hasBreadcrumbs = computed(() => {
                   </BreadcrumbLink>
                 </BreadcrumbItem>
                 <BreadcrumbSeparator
-                  class="hidden md:block"
                   v-if="index < breadcrumbs.length - 1"
+                  class="hidden md:block"
                 />
               </template>
             </BreadcrumbList>

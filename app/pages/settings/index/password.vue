@@ -2,25 +2,25 @@
 definePageMeta({
   breadcrumbs: [
     {
-      text: "Settings",
-      href: "/settings",
+      text: 'Settings',
+      href: '/settings',
     },
     {
-      text: "Password",
-      href: "/settings/password",
+      text: 'Password',
+      href: '/settings/password',
     },
   ],
-});
+})
 
 useHead({
-  title: "Password",
+  title: 'Password',
   meta: [
     {
-      name: "description",
-      content: "Settings Password",
+      name: 'description',
+      content: 'Settings Password',
     },
   ],
-});
+})
 </script>
 
 <template>

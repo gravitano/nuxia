@@ -1,28 +1,13 @@
 <script setup lang="ts">
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu'
+import type { LucideIcon } from 'lucide-vue-next'
 
 import {
   SidebarGroup,
   SidebarGroupLabel,
   SidebarMenu,
-  SidebarMenuAction,
   SidebarMenuButton,
   SidebarMenuItem,
-  useSidebar,
 } from '@/components/ui/sidebar'
-import {
-  Folder,
-  Forward,
-  type LucideIcon,
-  MoreHorizontal,
-  Trash2,
-} from 'lucide-vue-next'
 
 defineProps<{
   groupLabel?: string
@@ -32,8 +17,6 @@ defineProps<{
     icon: LucideIcon
   }[]
 }>()
-
-const { isMobile } = useSidebar()
 </script>
 
 <template>

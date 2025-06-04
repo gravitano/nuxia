@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { ChevronRight, type LucideIcon } from 'lucide-vue-next'
+import type { LucideIcon } from 'lucide-vue-next'
+import { ChevronRight } from 'lucide-vue-next'
 import {
   Collapsible,
   CollapsibleContent,
@@ -35,8 +36,8 @@ defineProps<{
     <SidebarGroupLabel>Platform</SidebarGroupLabel>
     <SidebarMenu>
       <template
-          v-for="item in items"
-          :key="item.title"
+        v-for="item in items"
+        :key="item.title"
       >
         <Collapsible
           v-if="item.items"

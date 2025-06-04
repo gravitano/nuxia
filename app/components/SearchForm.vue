@@ -1,11 +1,11 @@
 <script setup lang="ts">
+import { Search } from 'lucide-vue-next'
 import { Label } from '@/components/ui/label'
 import {
   SidebarGroup,
   SidebarGroupContent,
   SidebarInput,
 } from '@/components/ui/sidebar'
-import { Search } from 'lucide-vue-next'
 </script>
 
 <template>

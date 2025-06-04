@@ -2,25 +2,25 @@
 definePageMeta({
   breadcrumbs: [
     {
-      text: "Settings",
-      href: "/settings",
+      text: 'Settings',
+      href: '/settings',
     },
     {
-      text: "Appearance",
-      href: "/settings/appearance",
+      text: 'Appearance',
+      href: '/settings/appearance',
     },
   ],
-});
+})
 
 useHead({
-  title: "Appearance",
+  title: 'Appearance',
   meta: [
     {
-      name: "description",
-      content: "Settings Appearance",
+      name: 'description',
+      content: 'Settings Appearance',
     },
   ],
-});
+})
 </script>
 
 <template>

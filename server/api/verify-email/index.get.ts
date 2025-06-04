@@ -1,19 +1,19 @@
-import { users } from "~~/server/database/schema";
+import { users } from '~~/server/database/schema'
 
 export default defineEventHandler(async (event) => {
-  const query = getQuery(event);
-  const token = query.token as string;
+  const query = getQuery(event)
+  const token = query.token as string
 
-  const payload = verify(token);
+  const payload = verify(token)
 
   if (!payload || payload.expires < Date.now()) {
     return sendError(
       event,
       createError({
         statusCode: 400,
-        statusMessage: "Invalid or expired token",
-      })
-    );
+        statusMessage: 'Invalid or expired token',
+      }),
+    )
   }
 
   await db
@@ -21,7 +21,7 @@ export default defineEventHandler(async (event) => {
     .set({
       emailVerifiedAt: new Date(),
     })
-    .where(eq(users.id, payload.id));
+    .where(eq(users.id, payload.id))
 
-  return sendRedirect(event, "/auth/login?verified=true");
-});
+  return sendRedirect(event, '/auth/login?verified=true')
+})

@@ -1,34 +1,36 @@
 <script setup lang="ts">
-import { Eye, EyeOff } from "lucide-vue-next";
+import { Eye, EyeOff } from 'lucide-vue-next'
 
 export interface PasswordFieldProps {
-  name?: string;
-  label?: string;
-  description?: string;
-  placeholder?: string;
-  withForgotPassword?: boolean;
-  forgotPasswordLink?: string;
-  forgotPasswordText?: string;
+  name?: string
+  label?: string
+  description?: string
+  placeholder?: string
+  withForgotPassword?: boolean
+  forgotPasswordLink?: string
+  forgotPasswordText?: string
 }
 
 const {
-  name = "password",
-  label = "Password",
-  description = "",
-  placeholder = "Enter your password",
+  name = 'password',
+  label = 'Password',
+  description = '',
+  placeholder = 'Enter your password',
   withForgotPassword = false,
-  forgotPasswordLink = "/auth/forgot-password",
-  forgotPasswordText = "Forgot Password?",
-} = defineProps<PasswordFieldProps>();
+  forgotPasswordLink = '/auth/forgot-password',
+  forgotPasswordText = 'Forgot Password?',
+} = defineProps<PasswordFieldProps>()
 
-const isPasswordVisible = ref(false);
+const isPasswordVisible = ref(false)
 </script>
 
 <template>
   <FormField v-slot="{ componentField }" :name="name">
     <FormItem>
-      <div class="flex items-center" v-if="withForgotPassword">
-        <FormLabel :for="name">{{ label }}</FormLabel>
+      <div v-if="withForgotPassword" class="flex items-center">
+        <FormLabel :for="name">
+          {{ label }}
+        </FormLabel>
         <NuxtLink
           :to="forgotPasswordLink"
           class="ml-auto inline-block text-sm underline"

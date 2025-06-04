@@ -3,7 +3,9 @@
 <template>
   <div class="grid gap-4">
     <header>
-      <h3 class="mb-0.5 text-base font-medium">Delete account</h3>
+      <h3 class="mb-0.5 text-base font-medium">
+        Delete account
+      </h3>
       <p class="text-sm text-muted-foreground">
         Delete your account and all of its resources
       </p>

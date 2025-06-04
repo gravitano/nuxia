@@ -1,10 +1,10 @@
 // auth.d.ts
-declare module "#auth-utils" {
+declare module '#auth-utils' {
   interface User {
     // Add your own fields
-    id: number;
-    name: string;
-    email: string;
+    id: number
+    name: string
+    email: string
   }
 
   interface UserSession {
@@ -13,8 +13,8 @@ declare module "#auth-utils" {
 
   interface SecureSessionData {
     // Add your own fields
-    apiToken: string;
+    apiToken: string
   }
 }
 
-export {};
+export {}

@@ -1,4 +1,12 @@
 <script setup lang="ts">
+import { deleteAccountSchema } from '#shared/shemas/delete-account'
+import { toTypedSchema } from '@vee-validate/zod'
+
+import { Loader } from 'lucide-vue-next'
+import { useForm } from 'vee-validate'
+import { toast } from 'vue-sonner'
+
+import { Button } from '@/components/ui/button'
 import {
   Dialog,
   DialogContent,
@@ -7,66 +15,59 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/components/ui/dialog";
-import { toast } from "vue-sonner";
-
-import { useForm } from "vee-validate";
-import { toTypedSchema } from "@vee-validate/zod";
-import * as z from "zod";
-
-import { Button } from "@/components/ui/button";
+} from '@/components/ui/dialog'
 import {
   FormControl,
   FormField,
   FormItem,
   FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { deleteAccountSchema } from "#shared/shemas/delete-account";
-import { Loader } from "lucide-vue-next";
+} from '@/components/ui/form'
+import { Input } from '@/components/ui/input'
 
-const isOpen = defineModel<boolean>("open");
+const isOpen = defineModel<boolean>('open')
 
 const { handleSubmit, isSubmitting, meta } = useForm({
   validationSchema: toTypedSchema(deleteAccountSchema),
-});
+})
 
-const { clear } = useUserSession();
+const { clear } = useUserSession()
 
-const isLoading = ref(false);
+const isLoading = ref(false)
 
 const onSubmit = handleSubmit((values) => {
-  isLoading.value = true;
+  isLoading.value = true
 
-  $fetch("/api/settings/account", {
-    method: "DELETE",
+  $fetch('/api/settings/account', {
+    method: 'DELETE',
     body: JSON.stringify(values),
     headers: {
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
     },
   })
     .then(() => {
-      toast.success("Account deleted successfully");
-      isOpen.value = false;
-      clear();
-      navigateTo("/auth/login");
+      toast.success('Account deleted successfully')
+      isOpen.value = false
+      clear()
+      navigateTo('/auth/login')
     })
     .catch((error) => {
       toast.error(
-        error.data?.message || "An error occurred while deleting your account"
-      );
+        error.data?.message || 'An error occurred while deleting your account',
+      )
     })
     .finally(() => {
-      isLoading.value = false;
-    });
-});
+      isLoading.value = false
+    })
+})
 </script>
 
 <template>
   <Dialog v-model:open="isOpen">
     <DialogTrigger as-child>
       <slot name="trigger">
-        <Button variant="destructive" class="mt-2"> Delete account </Button>
+        <Button variant="destructive" class="mt-2">
+          Delete account
+        </Button>
       </slot>
     </DialogTrigger>
     <DialogContent>

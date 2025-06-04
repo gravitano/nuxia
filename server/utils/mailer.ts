@@ -1,10 +1,10 @@
 // server/utils/mailer.ts
-import { render } from "@vue-email/render";
-import nodemailer from "nodemailer";
-import ResetPasswordEmail from "../emails/ResetPasswordEmail.vue";
-import EmailVerificationEmail from "../emails/EmailVerificationEmail.vue";
+import { render } from '@vue-email/render'
+import nodemailer from 'nodemailer'
+import EmailVerificationEmail from '../emails/EmailVerificationEmail.vue'
+import ResetPasswordEmail from '../emails/ResetPasswordEmail.vue'
 
-const runtimeConfig = useRuntimeConfig();
+const runtimeConfig = useRuntimeConfig()
 
 const transporter = nodemailer.createTransport({
   host: runtimeConfig.mailHost,
@@ -14,50 +14,50 @@ const transporter = nodemailer.createTransport({
     user: runtimeConfig.mailUsername,
     pass: runtimeConfig.mailPassword,
   },
-});
+})
 
 export function getMailFrom() {
-  return `"${runtimeConfig.mailFromName}" <${runtimeConfig.mailUsername}>`;
+  return `"${runtimeConfig.mailFromName}" <${runtimeConfig.mailUsername}>`
 }
 
 export async function sendResetPasswordEmail(to: string, token: string) {
-  const link = `${runtimeConfig.appUrl}/auth/reset-password?token=${token}`;
+  const link = `${runtimeConfig.appUrl}/auth/reset-password?token=${token}`
   const html = await render(
     ResetPasswordEmail,
     {
-      name: "User",
+      name: 'User',
       resetUrl: link,
     },
     {
       pretty: true,
-    }
-  );
+    },
+  )
 
   return transporter.sendMail({
     from: getMailFrom(),
     to,
-    subject: "Reset Password",
+    subject: 'Reset Password',
     html,
-  });
+  })
 }
 
 export async function sendEmailVerificationEmail(to: string, token: string) {
-  const link = `${runtimeConfig.appUrl}/api/verify-email?token=${token}`;
+  const link = `${runtimeConfig.appUrl}/api/verify-email?token=${token}`
   const html = await render(
     EmailVerificationEmail,
     {
-      name: "User",
+      name: 'User',
       verifyUrl: link,
     },
     {
       pretty: true,
-    }
-  );
-  
+    },
+  )
+
   return transporter.sendMail({
     from: getMailFrom(),
     to,
-    subject: "Verifikasi Email",
+    subject: 'Verifikasi Email',
     html,
-  });
+  })
 }

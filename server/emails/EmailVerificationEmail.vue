@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import {
-  Html,
-  Head,
-  Font,
-  Tailwind,
-  Container,
-  Text,
   Button,
+  Container,
+  Font,
+  Head,
+  Html,
   Section,
+  Tailwind,
+  Text,
 } from '@vue-email/components'
 
 defineProps<{
@@ -48,7 +48,9 @@ defineProps<{
     >
       <Section class="bg-gray-100 py-10 px-5 font-sans">
         <Container class="bg-white max-w-xl mx-auto p-6 rounded-lg shadow">
-          <Text class="text-sm text-gray-500 mb-4">Hi {{ name }},</Text>
+          <Text class="text-sm text-gray-500 mb-4">
+            Hi {{ name }},
+          </Text>
 
           <Text class="text-text text-base mb-6">
             Thanks for signing up! Please confirm your email address by clicking the button below:

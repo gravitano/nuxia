@@ -1,33 +1,33 @@
 <script setup lang="ts">
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-import { AlertCircle, Info, FileWarning, CheckCircle } from "lucide-vue-next";
+import { AlertCircle, CheckCircle, FileWarning, Info } from 'lucide-vue-next'
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
 
 export interface AlertMessageProps {
-  title?: string;
-  description: string;
-  variant?: "info" | "success" | "warning" | "error";
+  title?: string
+  description: string
+  variant?: 'info' | 'success' | 'warning' | 'error'
 }
 
 const {
   title,
   description,
-  variant = "info",
-} = defineProps<AlertMessageProps>();
+  variant = 'info',
+} = defineProps<AlertMessageProps>()
 
 const alertIcon = computed(() => {
   switch (variant) {
-    case "info":
-      return Info;
-    case "success":
-      return CheckCircle;
-    case "warning":
-      return FileWarning;
-    case "error":
-      return AlertCircle;
+    case 'info':
+      return Info
+    case 'success':
+      return CheckCircle
+    case 'warning':
+      return FileWarning
+    case 'error':
+      return AlertCircle
     default:
-      return Info;
+      return Info
   }
-});
+})
 </script>
 
 <template>

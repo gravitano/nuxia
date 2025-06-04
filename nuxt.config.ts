@@ -1,67 +1,38 @@
-import tailwindcss from "@tailwindcss/vite";
+import tailwindcss from '@tailwindcss/vite'
 import vue from '@vitejs/plugin-vue'
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  compatibilityDate: "2024-11-01",
-  devtools: { enabled: true },
-  future: {
-    compatibilityVersion: 4,
-  },
 
   modules: [
-    "@nuxt/eslint",
-    "@nuxt/fonts",
-    "@nuxt/icon",
-    "@nuxt/image",
-    "@nuxt/scripts",
-    "@nuxt/test-utils",
-    "shadcn-nuxt",
-    "@nuxtjs/color-mode",
-    "nuxt-auth-utils",
-    "nuxt-workers"
+    '@nuxt/eslint',
+    '@nuxt/fonts',
+    '@nuxt/icon',
+    '@nuxt/image',
+    '@nuxt/scripts',
+    '@nuxt/test-utils',
+    'shadcn-nuxt',
+    '@nuxtjs/color-mode',
+    'nuxt-auth-utils',
+    'nuxt-workers',
   ],
-
-  css: ["~/assets/css/tailwind.css"],
-
-  vite: {
-    plugins: [tailwindcss()],
-  },
-
-  shadcn: {
-    /**
-     * Prefix for all the imported component
-     */
-    prefix: "",
-    /**
-     * Directory that the component lives in.
-     * @default "./components/ui"
-     */
-    componentDir: "./app/components/ui",
-  },
-
-  colorMode: {
-    classSuffix: "",
-    preference: "system", // atau 'dark' | 'light'
-    fallback: "light",
-    storage: "cookie",
-  },
+  devtools: { enabled: true },
 
   app: {
     head: {
       htmlAttrs: {
-        lang: "en",
+        lang: 'en',
       },
     },
   },
 
-  nitro: {
-    experimental: {
-      tasks: true,
-    },
-    rollupConfig: {
-      plugins: [vue()]
-    },
+  css: ['~/assets/css/tailwind.css'],
+
+  colorMode: {
+    classSuffix: '',
+    preference: 'system', // atau 'dark' | 'light'
+    fallback: 'light',
+    storage: 'cookie',
   },
 
   runtimeConfig: {
@@ -72,6 +43,42 @@ export default defineNuxtConfig({
     mailUsername: '',
     mailPassword: '',
     mailFromName: 'Warsono',
-    mailFromEmail: 'warsono16694@gmail.com'
-  }
-});
+    mailFromEmail: 'warsono16694@gmail.com',
+  },
+  future: {
+    compatibilityVersion: 4,
+  },
+  compatibilityDate: '2024-11-01',
+
+  nitro: {
+    experimental: {
+      tasks: true,
+    },
+    rollupConfig: {
+      plugins: [vue()],
+    },
+  },
+
+  vite: {
+    plugins: [tailwindcss()],
+  },
+
+  eslint: {
+    config: {
+      stylistic: true,
+      standalone: false,
+    },
+  },
+
+  shadcn: {
+    /**
+     * Prefix for all the imported component
+     */
+    prefix: '',
+    /**
+     * Directory that the component lives in.
+     * @default "./components/ui"
+     */
+    componentDir: './app/components/ui',
+  },
+})

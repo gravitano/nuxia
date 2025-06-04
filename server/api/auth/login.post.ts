@@ -1,52 +1,52 @@
-import { defineEventHandler, readBody } from "h3";
-import { loginSchema } from "#shared/shemas/login";
+import { loginSchema } from '#shared/shemas/login'
+import { defineEventHandler, readBody } from 'h3'
 
 export default defineEventHandler(async (event) => {
-  const body = await readBody(event);
+  const body = await readBody(event)
 
   // validate with zod
-  const result = loginSchema.safeParse(body);
+  const result = loginSchema.safeParse(body)
   if (!result.success) {
     return createError({
       statusCode: 422,
-      statusMessage: "Validation error",
+      statusMessage: 'Validation error',
       data: result.error,
-    });
+    })
   }
 
-  const { email, password } = result.data;
+  const { email, password } = result.data
 
   if (!email || !password) {
-    return { error: "Email and password are required" };
+    return { error: 'Email and password are required' }
   }
 
   // Cari user berdasarkan email
   const user = await db.query.users.findFirst({
     where: (u, { eq }) => eq(u.email, email),
-  });
+  })
 
   if (!user) {
     return createError({
       statusCode: 401,
-      statusMessage: "Invalid email or password",
-    });
+      statusMessage: 'Invalid email or password',
+    })
   }
 
   // Tambahkan pengecekan email terverifikasi
   if (!user.emailVerifiedAt) {
     return createError({
       statusCode: 403,
-      statusMessage: "Please verify your email before logging in.",
-    });
+      statusMessage: 'Please verify your email before logging in.',
+    })
   }
 
   // Cek password cocok
-  const isValid = await verifyPassword(user.password, password);
+  const isValid = await verifyPassword(user.password, password)
   if (!isValid) {
     return createError({
       statusCode: 401,
-      statusMessage: "Invalid email or password",
-    });
+      statusMessage: 'Invalid email or password',
+    })
   }
 
   // Generate access token
@@ -54,7 +54,7 @@ export default defineEventHandler(async (event) => {
     sub: user.id,
     name: user.name,
     email: user.email,
-  });
+  })
 
   // Simpan session
   await setUserSession(event, {
@@ -67,7 +67,7 @@ export default defineEventHandler(async (event) => {
       apiToken: accessToken,
     },
     loggedInAt: new Date(),
-  });
+  })
 
   return {
     data: {
@@ -78,5 +78,5 @@ export default defineEventHandler(async (event) => {
       },
       access_token: accessToken,
     },
-  };
-});
+  }
+})

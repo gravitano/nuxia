@@ -3,7 +3,6 @@ import type { SidebarProps } from '@/components/ui/sidebar'
 
 import {
   AudioWaveform,
-  BookOpen,
   Bot,
   Command,
   Frame,
@@ -11,11 +10,8 @@ import {
   LayoutDashboard,
   Map,
   PieChart,
-  Settings2,
-  SquareTerminal,
 } from 'lucide-vue-next'
 import NavMain from '@/components/NavMain.vue'
-import NavProjects from '@/components/NavProjects.vue'
 import NavUser from '@/components/NavUser.vue'
 import TeamSwitcher from '@/components/TeamSwitcher.vue'
 
@@ -31,7 +27,7 @@ const props = withDefaults(defineProps<SidebarProps>(), {
   collapsible: 'icon',
 })
 
-const {user} = useUserSession()
+const { user } = useUserSession()
 
 // This is sample data.
 const data = {

@@ -8,17 +8,17 @@
 
 ## 🔧 Tech Stack
 
-* ✅ **Nuxt** — The Progressive Web Framework
-* 🎨 **Tailwind CSS** — Utility-first CSS framework for rapid UI development
-* 🧩 **shadcn-vue** — Beautiful UI components built with Tailwind CSS
-* 🧠 **Drizzle ORM** — Headless TypeScript ORM with a head
-* 🐘 **PostgreSQL** — Reliable open-source SQL database
-* 🔐 **nuxt-auth-utils** — Authentication utilities for Nuxt
-* 🛠️ **nuxt-workers** — SSR-safe, zero-config Web Workers integration for Nuxt
-* 📨 **Vue Email** — Build and send emails using Vue & TypeScript
-* ✉️ **Nodemailer** — Send emails easily with SMTP
-* 🔎 **Zod** — TypeScript-first schema validation with superpowers
-* 🌱 **TypeScript** — Full type safety across frontend & backend
+- ✅ **Nuxt** — The Progressive Web Framework
+- 🎨 **Tailwind CSS** — Utility-first CSS framework for rapid UI development
+- 🧩 **shadcn-vue** — Beautiful UI components built with Tailwind CSS
+- 🧠 **Drizzle ORM** — Headless TypeScript ORM with a head
+- 🐘 **PostgreSQL** — Reliable open-source SQL database
+- 🔐 **nuxt-auth-utils** — Authentication utilities for Nuxt
+- 🛠️ **nuxt-workers** — SSR-safe, zero-config Web Workers integration for Nuxt
+- 📨 **Vue Email** — Build and send emails using Vue & TypeScript
+- ✉️ **Nodemailer** — Send emails easily with SMTP
+- 🔎 **Zod** — TypeScript-first schema validation with superpowers
+- 🌱 **TypeScript** — Full type safety across frontend & backend
 
 ## Setup
 
