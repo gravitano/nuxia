@@ -1,6 +1,9 @@
-# Nuxt Minimal Starter
+# Nuxt Fullstack Starter
 
-Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+## Documentation
+
+- [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction)
+- [Drizzle](https://orm.drizzle.team/)
 
 ## Setup
 
