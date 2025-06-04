@@ -81,19 +81,7 @@ const onSubmit = handleSubmit((values) => {
             </FormItem>
           </FormField>
 
-          <FormField v-slot="{ componentField }" name="password">
-            <FormItem>
-              <FormLabel>Password</FormLabel>
-              <FormControl>
-                <Input
-                  type="password"
-                  placeholder="Enter your password"
-                  v-bind="componentField"
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          </FormField>
+          <PasswordField with-forgot-password />
 
           <Button
             type="submit"
@@ -107,6 +95,7 @@ const onSubmit = handleSubmit((values) => {
             />
             {{ isSubmitting || isLoading ? "Creating..." : "Create Account" }}
           </Button>
+
           <Button
             type="button"
             variant="outline"

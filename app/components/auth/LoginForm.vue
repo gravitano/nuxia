@@ -72,27 +72,7 @@ const onSubmit = handleSubmit((values) => {
             </FormItem>
           </FormField>
 
-          <FormField v-slot="{ componentField }" name="password">
-            <FormItem>
-              <div class="flex items-center">
-                <FormLabel for="password">Password</FormLabel>
-                <NuxtLink
-                  to="/auth/forgot-password"
-                  class="ml-auto inline-block text-sm underline"
-                >
-                  Forgot your password?
-                </NuxtLink>
-              </div>
-              <FormControl>
-                <Input
-                  type="password"
-                  placeholder="Enter your password"
-                  v-bind="componentField"
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          </FormField>
+          <PasswordField with-forgot-password />
 
           <Button
             type="submit"
