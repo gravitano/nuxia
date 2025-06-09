@@ -96,7 +96,12 @@ const techStack = [
         >
           <span class="text-2xl">🧬</span> Nuxia
         </NuxtLink>
-        <nav>
+        <nav class="flex items-center gap-4">
+          <Button as-child class="rounded-full p-0 size-8">
+            <NuxtLink href="https://github.com/gravitano/nuxia" target="_blank" rel="noopener noreferrer">
+              <Icon name="i-logos:github-icon" />
+            </NuxtLink>
+          </Button>
           <Button v-if="loggedIn" as-child>
             <NuxtLink to="/dashboard">
               Dashboard
@@ -127,11 +132,19 @@ const techStack = [
         <p class="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
           {{ appConfig.app.description }}
         </p>
-        <Button as-child>
-          <NuxtLink to="/auth/login">
-            Get Started
-          </NuxtLink>
-        </Button>
+        <div class="flex justify-center items-center">
+          <Button as-child>
+            <NuxtLink to="/auth/login">
+              Get Started
+            </NuxtLink>
+          </Button>
+          <!-- github -->
+          <Button as-child variant="outline" class="ml-4">
+            <NuxtLink href="https://github.com/gravitano/nuxia" target="_blank" rel="noopener noreferrer">
+              View on GitHub
+            </NuxtLink>
+          </Button>
+        </div>
       </div>
     </section>
 
