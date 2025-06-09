@@ -170,9 +170,9 @@ const techStack = [
           :to="tech.url"
           target="_blank"
           rel="noopener noreferrer"
-          class="block h-full"
+          class="block h-full group"
         >
-          <Card class="h-full">
+          <Card class="h-full group-hover:border-primary transition-all duration-200">
             <CardContent class="space-y-2">
               <div class="text-lg">
                 {{ tech.icon }}
