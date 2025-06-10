@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 // server/utils/mailer.ts
 import { render } from '@vue-email/render'
 import nodemailer from 'nodemailer'
@@ -39,6 +40,12 @@ export async function sendResetPasswordEmail(to: string, token: string) {
     subject: 'Reset Password',
     html,
   })
+    .then(() => {
+      console.log('Reset password email sent successfully')
+    })
+    .catch((error) => {
+      console.error('Error sending reset password email:', error)
+    })
 }
 
 export async function sendEmailVerificationEmail(to: string, token: string) {
@@ -59,5 +66,10 @@ export async function sendEmailVerificationEmail(to: string, token: string) {
     to,
     subject: 'Verifikasi Email',
     html,
+  }).then(() => {
+    console.log('Email verification email sent successfully')
+  },
+  ).catch((error) => {
+    console.error('Error sending email verification email:', error)
   })
 }
