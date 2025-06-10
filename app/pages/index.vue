@@ -86,7 +86,7 @@ const techStack = [
 
 <template>
   <div class="flex flex-col min-h-screen bg-background">
-    <header class="border-b sticky top-0 z-50 backdrop-blur bg-background/70">
+    <header class="fixed w-full top-0 z-50 backdrop-blur bg-background/70">
       <div
         class="container mx-auto flex justify-between items-center px-4 lg:px-0 py-6"
       >
@@ -123,27 +123,35 @@ const techStack = [
 
     <section
       id="hero"
-      class="container mx-auto px-4 lg:px-0 py-20 relative animate-fade-in-up"
+      class="relative animate-fade-in-up min-h-screen flex flex-col items-center justify-center text-center"
     >
-      <div class="text-center">
-        <h1 class="text-4xl font-bold mb-4">
-          {{ appConfig.app.name }}
-        </h1>
-        <p class="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
-          {{ appConfig.app.description }}
-        </p>
-        <div class="flex justify-center items-center">
-          <Button as-child>
-            <NuxtLink to="/auth/login">
-              Get Started
-            </NuxtLink>
-          </Button>
-          <!-- github -->
-          <Button as-child variant="outline" class="ml-4">
-            <NuxtLink href="https://github.com/gravitano/nuxia" target="_blank" rel="noopener noreferrer">
-              View on GitHub
-            </NuxtLink>
-          </Button>
+      <!-- background -->
+      <div
+        class="absolute inset-0 bg-linear-to-br/hsl from-slate-950 to-emerald-500 from-55% z-[1]"
+      />
+
+      <!-- hero content -->
+      <div class="container mx-auto px-4 lg:px-0 lg:py-20 z-10">
+        <div class="text-center">
+          <h1 class="text-4xl font-bold mb-4">
+            {{ appConfig.app.name }}
+          </h1>
+          <p class="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
+            {{ appConfig.app.description }}
+          </p>
+          <div class="flex justify-center items-center">
+            <Button as-child>
+              <NuxtLink to="/auth/login">
+                Get Started
+              </NuxtLink>
+            </Button>
+            <!-- github -->
+            <Button as-child variant="outline" class="ml-4">
+              <NuxtLink href="https://github.com/gravitano/nuxia" target="_blank" rel="noopener noreferrer">
+                View on GitHub
+              </NuxtLink>
+            </Button>
+          </div>
         </div>
       </div>
     </section>
@@ -172,8 +180,13 @@ const techStack = [
           rel="noopener noreferrer"
           class="block h-full group"
         >
-          <Card class="h-full group-hover:border-primary transition-all duration-200">
-            <CardContent class="space-y-2">
+          <Card class="h-full group-hover:border-primary transition-all duration-200 relative overflow-hidden">
+            <!-- background -->
+            <div
+              class="absolute inset-0 bg-linear-to-br/hsl from-slate-950 to-emerald-500 from-75% z-[1]"
+            />
+
+            <CardContent class="space-y-2 z-10">
               <div class="text-lg">
                 {{ tech.icon }}
               </div>
