@@ -2,7 +2,7 @@ import { randomBytes } from 'node:crypto'
 // server/api/auth/forgot-password.ts
 import { defineEventHandler, readBody } from 'h3'
 import { passwordResetTokens } from '~~/server/database/schema'
-import { sendResetPasswordEmailWorker } from '~~/workers/email-worker'
+import { sendResetPasswordEmailWorker } from '~~/server/workers/email-worker'
 
 export default defineEventHandler(async (event) => {
   const body = await readBody(event)

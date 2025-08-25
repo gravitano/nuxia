@@ -1,5 +1,5 @@
 import { defineEventHandler, readBody } from 'h3'
-import { sendEmailVerificationEmailWorker } from '~~/workers/email-worker'
+import { sendEmailVerificationEmailWorker } from '~~/server/workers/email-worker'
 
 export default defineEventHandler(async (event) => {
   const body = await readBody(event)
