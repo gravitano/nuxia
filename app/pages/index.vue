@@ -127,7 +127,7 @@ const techStack = [
     >
       <!-- background -->
       <div
-        class="absolute inset-0 bg-linear-to-br/hsl from-slate-950 to-emerald-500 from-55% z-[1]"
+        class="absolute inset-0 bg-linear-to-br/hsl from-zinc-950 to-neutral-500 from-75% z-[1]"
       />
 
       <!-- hero content -->
@@ -183,7 +183,7 @@ const techStack = [
           <Card class="h-full group-hover:border-primary transition-all duration-200 relative overflow-hidden">
             <!-- background -->
             <div
-              class="absolute inset-0 bg-linear-to-br/hsl from-slate-950 to-emerald-500 from-75% z-[1]"
+              class="absolute inset-0 bg-linear-to-br/hsl from-zinc-950 to-neutral-500 from-75% z-[1]"
             />
 
             <CardContent class="space-y-2 z-10">
