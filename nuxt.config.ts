@@ -13,6 +13,7 @@ export default defineNuxtConfig({
     '@nuxt/test-utils',
     'shadcn-nuxt',
     '@nuxtjs/color-mode',
+    '@nuxtjs/mdc',
     'nuxt-auth-utils',
     'nuxt-workers',
   ],

@@ -5,6 +5,7 @@ import {
   AudioWaveform,
   Bot,
   Command,
+  FileText,
   Frame,
   GalleryVerticalEnd,
   LayoutDashboard,
@@ -58,21 +59,11 @@ const data = {
       title: 'Dashboard',
       url: '/dashboard',
       icon: LayoutDashboard,
-      // isActive: true,
-      // items: [
-      //   {
-      //     title: 'History',
-      //     url: '#',
-      //   },
-      //   {
-      //     title: 'Starred',
-      //     url: '#',
-      //   },
-      //   {
-      //     title: 'Settings',
-      //     url: '#',
-      //   },
-      // ],
+    },
+    {
+      title: 'Notes',
+      url: '/notes',
+      icon: FileText,
     },
     {
       title: 'Models',
