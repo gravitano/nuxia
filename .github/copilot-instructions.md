@@ -11,30 +11,35 @@
 ## Key Development Patterns
 
 ### File Structure Conventions
+
 - Place new pages in `app/pages/` (auto-routed)
 - Use `app/components/` for reusable components, following shadcn-vue patterns
 - Server API endpoints go in `server/api/` with `.get.ts`/`.post.ts` suffixes
 - Shared validation schemas in `shared/schemas/` (used by both client/server)
 
 ### Authentication Flow
+
 - Use `nuxt-auth-utils` for session management: `useUserSession()` composable
 - Protect pages with `auth.ts` middleware: `definePageMeta({ middleware: 'auth' })`
 - API endpoints validate with Zod schemas from `shared/schemas/`
 - JWT tokens generated in `server/utils/jwt.ts` for API access
 
 ### Database Patterns
+
 - Schema defined in `server/database/schema.ts` using Drizzle ORM
 - Run migrations: `pnpm db:push` (pushes schema changes)
 - Seed data: `pnpm db:seed` (runs `server/tasks/seed.ts`)
 - Query using `db.query.tableName.findFirst()` pattern
 
 ### Component Structure
+
 - Forms use `vee-validate` + Zod: import from `@vee-validate/zod`
 - UI components from `app/components/ui/` (shadcn-vue based)
 - Emit pattern: `defineEmits<{ submit: [values: FormType] }>()` for type safety
 - Props: `defineProps<{ isLoading?: boolean }>()` with TypeScript
 
 ### Email & Background Tasks
+
 - Email templates in `server/emails/` as Vue components
 - Background email sending via `server/workers/email-worker.ts`
 - Tasks defined in `server/tasks/` for database operations
@@ -61,6 +66,7 @@ pnpm lint:fix              # Auto-fix linting issues
 ## Code Examples
 
 ### API Endpoint Pattern
+
 ```typescript
 // server/api/example.post.ts
 export default defineEventHandler(async (event) => {
@@ -74,16 +80,18 @@ export default defineEventHandler(async (event) => {
 ```
 
 ### Form Component Pattern
+
 ```vue
 <script setup lang="ts">
+const emit = defineEmits<{ submit: [values: FormValues] }>()
 const formSchema = z.object({ /* ... */ })
 type FormValues = z.infer<typeof formSchema>
-const emit = defineEmits<{ submit: [values: FormValues] }>()
 const { handleSubmit } = useForm({ validationSchema: toTypedSchema(formSchema) })
 </script>
 ```
 
 ### Protected Page
+
 ```vue
 <script setup lang="ts">
 definePageMeta({ middleware: 'auth' })

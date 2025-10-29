@@ -16,7 +16,7 @@
 - 🔐 **nuxt-auth-utils** — Authentication utilities for Nuxt
 - 🛠️ **nuxt-workers** — SSR-safe, zero-config Web Workers integration for Nuxt
 - 📨 **Vue Email** — Build and send emails using Vue & TypeScript
-- ✉️ **Nodemailer** — Send emails easily with SMTP
+- ✉️ **Resend** — Modern email API for developers
 - 🔎 **Zod** — TypeScript-first schema validation with superpowers
 - 🌱 **TypeScript** — Full type safety across frontend & backend
 
@@ -27,8 +27,13 @@
 npx giget@latest gh:gravitano/nuxia nuxia-app
 cd nuxia-app
 
-# Copy the example environment variables
-cp .env.example .env
+# Create .env file with the following variables:
+# DATABASE_URL=postgresql://user:password@localhost:5432/nuxia
+# JWT_SECRET=your-jwt-secret-key-here
+# NUXT_APP_URL=http://localhost:3000
+# NUXT_RESEND_API_KEY=re_xxxxxxxxxxxxxxxxxxxxxxxxxx
+# NUXT_MAIL_FROM_NAME=Nuxia
+# NUXT_MAIL_FROM_EMAIL=onboarding@resend.dev
 
 # Install dependencies
 pnpm install # or yarn, bun, etc.
@@ -40,6 +45,29 @@ pnpm db:seed
 # Start the development server
 pnpm dev
 ```
+
+## Environment Variables
+
+Create a `.env` file in the root directory with the following variables:
+
+```bash
+# Database
+DATABASE_URL=postgresql://user:password@localhost:5432/nuxia
+
+# JWT
+JWT_SECRET=your-jwt-secret-key-here
+
+# Application
+NUXT_APP_URL=http://localhost:3000
+
+# Resend Email Service
+# Get your API key from https://resend.com/api-keys
+NUXT_RESEND_API_KEY=re_xxxxxxxxxxxxxxxxxxxxxxxxxx
+NUXT_MAIL_FROM_NAME=Nuxia
+NUXT_MAIL_FROM_EMAIL=onboarding@resend.dev
+```
+
+> **Note**: You need to get a Resend API key from [resend.com](https://resend.com). The free tier includes 100 emails/day and 3,000 emails/month.
 
 ## Development Server
 

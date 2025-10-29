@@ -37,11 +37,7 @@ export default defineNuxtConfig({
 
   runtimeConfig: {
     appUrl: 'http://localhost:3000',
-    mailHost: '',
-    mailPort: 587,
-    mailSecure: false,
-    mailUsername: '',
-    mailPassword: '',
+    resendApiKey: '',
     mailFromName: 'Warsono',
     mailFromEmail: 'warsono16694@gmail.com',
   },

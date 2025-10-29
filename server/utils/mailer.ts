@@ -1,24 +1,16 @@
 /* eslint-disable no-console */
 // server/utils/mailer.ts
 import { render } from '@vue-email/render'
-import nodemailer from 'nodemailer'
+import { Resend } from 'resend'
 import EmailVerificationEmail from '../emails/EmailVerificationEmail.vue'
 import ResetPasswordEmail from '../emails/ResetPasswordEmail.vue'
 
 const runtimeConfig = useRuntimeConfig()
 
-const transporter = nodemailer.createTransport({
-  host: runtimeConfig.mailHost,
-  port: Number(runtimeConfig.mailPort || 587),
-  secure: runtimeConfig.mailSecure,
-  auth: {
-    user: runtimeConfig.mailUsername,
-    pass: runtimeConfig.mailPassword,
-  },
-})
+const resend = new Resend(runtimeConfig.resendApiKey)
 
 export function getMailFrom() {
-  return `"${runtimeConfig.mailFromName}" <${runtimeConfig.mailUsername}>`
+  return `${runtimeConfig.mailFromName} <${runtimeConfig.mailFromEmail}>`
 }
 
 export async function sendResetPasswordEmail(to: string, token: string) {
@@ -34,18 +26,18 @@ export async function sendResetPasswordEmail(to: string, token: string) {
     },
   )
 
-  return transporter.sendMail({
-    from: getMailFrom(),
-    to,
-    subject: 'Reset Password',
-    html,
-  })
-    .then(() => {
-      console.log('Reset password email sent successfully')
+  try {
+    await resend.emails.send({
+      from: getMailFrom(),
+      to,
+      subject: 'Reset Password',
+      html,
     })
-    .catch((error) => {
-      console.error('Error sending reset password email:', error)
-    })
+    console.log('Reset password email sent successfully')
+  }
+  catch (error) {
+    console.error('Error sending reset password email:', error)
+  }
 }
 
 export async function sendEmailVerificationEmail(to: string, token: string) {
@@ -61,15 +53,16 @@ export async function sendEmailVerificationEmail(to: string, token: string) {
     },
   )
 
-  return transporter.sendMail({
-    from: getMailFrom(),
-    to,
-    subject: 'Verifikasi Email',
-    html,
-  }).then(() => {
+  try {
+    await resend.emails.send({
+      from: getMailFrom(),
+      to,
+      subject: 'Verifikasi Email',
+      html,
+    })
     console.log('Email verification email sent successfully')
-  },
-  ).catch((error) => {
+  }
+  catch (error) {
     console.error('Error sending email verification email:', error)
-  })
+  }
 }
