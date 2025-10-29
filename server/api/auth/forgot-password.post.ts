@@ -2,6 +2,7 @@ import { randomBytes } from 'node:crypto'
 // server/api/auth/forgot-password.ts
 import { defineEventHandler, readBody } from 'h3'
 import { passwordResetTokens } from '~~/server/database/schema'
+import sendForgotPasswordEmailQueue from '~~/server/queues/send-forgot-password-email.queue'
 import { sendResetPasswordEmailWorker } from '~~/server/workers/email-worker'
 
 export default defineEventHandler(async (event) => {
@@ -37,7 +38,13 @@ export default defineEventHandler(async (event) => {
   })
 
   // Kirim email via worker
-  sendResetPasswordEmailWorker(email, token)
+  // sendResetPasswordEmailWorker(email, token)
+
+  // send email via queue
+  await sendForgotPasswordEmailQueue.add('send-forgot-password-email', {
+    email,
+    token,
+  })
 
   return {
     data: true,

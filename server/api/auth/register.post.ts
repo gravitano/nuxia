@@ -1,6 +1,7 @@
 // server/api/auth/register.ts
 import { defineEventHandler, readBody } from 'h3'
 import { users } from '~~/server/database/schema'
+import sendConfirmationEmailQueue from '~~/server/queues/send-confirmation-email.queue'
 
 export default defineEventHandler(async (event) => {
   const body = await readBody(event)
@@ -47,7 +48,11 @@ export default defineEventHandler(async (event) => {
     expires: Date.now() + 60 * 1000, // 1 minute
   })
 
-  await sendEmailVerificationEmail(user.email, token)
+  // send email verification via queue
+  await sendConfirmationEmailQueue.add('send-confirmation-email', {
+    email: user.email,
+    token,
+  })
 
   return {
     data: {

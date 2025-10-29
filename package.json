@@ -14,9 +14,13 @@
     "migrate": "drizzle-kit push",
     "db:seed": "nitro task run db:seed",
     "lint": "eslint .",
-    "lint:fix": "eslint . --fix"
+    "lint:fix": "eslint . --fix",
+    "processor:dev": "npx nuxt-processor dev",
+    "processor:prod": "node .output/server/workers/index.mjs"
   },
   "dependencies": {
+    "@bull-board/api": "^6.14.0",
+    "@bull-board/h3": "^6.14.0",
     "@nuxt/eslint": "1.3.0",
     "@nuxt/fonts": "0.11.1",
     "@nuxt/icon": "1.12.0",
@@ -40,6 +44,7 @@
     "lucide-vue-next": "^0.503.0",
     "nuxt": "^4.2.0",
     "nuxt-auth-utils": "0.5.20",
+    "nuxt-processor": "0.0.12",
     "nuxt-workers": "0.1.0",
     "pg": "^8.15.1",
     "reka-ui": "^2.2.0",
