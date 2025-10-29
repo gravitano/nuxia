@@ -69,19 +69,29 @@ export default defineNuxtConfig({
     redis: {
       // Prefer a single URL if available (takes precedence over other fields)
       // e.g. redis://user:pass@host:6379/0
+      // eslint-disable-next-line node/prefer-global/process
       url: process.env.NUXT_REDIS_URL,
+      // eslint-disable-next-line node/prefer-global/process
       host: process.env.NUXT_REDIS_HOST ?? '127.0.0.1',
+      // eslint-disable-next-line node/prefer-global/process
       port: Number(process.env.NUXT_REDIS_PORT ?? 6379),
+      // eslint-disable-next-line node/prefer-global/process
       password: process.env.NUXT_REDIS_PASSWORD ?? '',
+      // eslint-disable-next-line node/prefer-global/process
       username: process.env.NUXT_REDIS_USERNAME,
+      // eslint-disable-next-line node/prefer-global/process
       db: Number(process.env.NUXT_REDIS_DB ?? 0),
       // Optional connection behavior
       // Delay connecting until first Redis command (useful to avoid build-time connects)
+      // eslint-disable-next-line node/prefer-global/process
       lazyConnect: process.env.NUXT_REDIS_LAZY_CONNECT
+        // eslint-disable-next-line node/prefer-global/process
         ? process.env.NUXT_REDIS_LAZY_CONNECT === 'true'
         : undefined,
       // Milliseconds to wait before giving up when establishing the connection
+      // eslint-disable-next-line node/prefer-global/process
       connectTimeout: process.env.NUXT_REDIS_CONNECT_TIMEOUT
+        // eslint-disable-next-line node/prefer-global/process
         ? Number(process.env.NUXT_REDIS_CONNECT_TIMEOUT)
         : undefined,
     },

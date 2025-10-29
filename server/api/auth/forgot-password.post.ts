@@ -3,7 +3,6 @@ import { randomBytes } from 'node:crypto'
 import { defineEventHandler, readBody } from 'h3'
 import { passwordResetTokens } from '~~/server/database/schema'
 import sendForgotPasswordEmailQueue from '~~/server/queues/send-forgot-password-email.queue'
-import { sendResetPasswordEmailWorker } from '~~/server/workers/email-worker'
 
 export default defineEventHandler(async (event) => {
   const body = await readBody(event)
