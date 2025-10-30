@@ -14,6 +14,39 @@ useSeoMeta({
 
 const { loggedIn } = useUserSession()
 
+const features = [
+  {
+    icon: '🔐',
+    title: 'Authentication',
+    description: 'Secure authentication flows with nuxt-auth-utils, JWT secrets, and protected routes.',
+  },
+  {
+    icon: '📨',
+    title: 'Email System',
+    description: 'Build beautiful emails with Vue Email and send them via Resend API integration.',
+  },
+  {
+    icon: '⚙️',
+    title: 'Job Queues',
+    description: 'Background job processing with Bull queues, Redis, and a beautiful Bull Board dashboard.',
+  },
+  {
+    icon: '🐘',
+    title: 'Database Management',
+    description: 'Type-safe database operations with Drizzle ORM, migrations, and PostgreSQL.',
+  },
+  {
+    icon: '🌱',
+    title: 'Type Safety',
+    description: 'End-to-end TypeScript with Zod schemas shared between client and server.',
+  },
+  {
+    icon: '🧩',
+    title: 'UI Components',
+    description: 'Beautiful, accessible components built with shadcn-vue and Tailwind CSS.',
+  },
+]
+
 const techStack = [
   {
     icon: '✅',
@@ -190,65 +223,13 @@ const techStack = [
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        <Card class="h-full">
-          <CardContent class="p-6 space-y-3">
-            <div class="text-2xl">🔐</div>
-            <h3 class="text-lg font-semibold">Authentication</h3>
-            <p class="text-sm text-muted-foreground">
-              Secure authentication flows with nuxt-auth-utils, JWT secrets, and protected routes.
-            </p>
-          </CardContent>
-        </Card>
-
-        <Card class="h-full">
-          <CardContent class="p-6 space-y-3">
-            <div class="text-2xl">📨</div>
-            <h3 class="text-lg font-semibold">Email System</h3>
-            <p class="text-sm text-muted-foreground">
-              Build beautiful emails with Vue Email and send them via Resend API integration.
-            </p>
-          </CardContent>
-        </Card>
-
-        <Card class="h-full">
-          <CardContent class="p-6 space-y-3">
-            <div class="text-2xl">⚙️</div>
-            <h3 class="text-lg font-semibold">Job Queues</h3>
-            <p class="text-sm text-muted-foreground">
-              Background job processing with Bull queues, Redis, and a beautiful Bull Board dashboard.
-            </p>
-          </CardContent>
-        </Card>
-
-        <Card class="h-full">
-          <CardContent class="p-6 space-y-3">
-            <div class="text-2xl">🐘</div>
-            <h3 class="text-lg font-semibold">Database Management</h3>
-            <p class="text-sm text-muted-foreground">
-              Type-safe database operations with Drizzle ORM, migrations, and PostgreSQL.
-            </p>
-          </CardContent>
-        </Card>
-
-        <Card class="h-full">
-          <CardContent class="p-6 space-y-3">
-            <div class="text-2xl">🌱</div>
-            <h3 class="text-lg font-semibold">Type Safety</h3>
-            <p class="text-sm text-muted-foreground">
-              End-to-end TypeScript with Zod schemas shared between client and server.
-            </p>
-          </CardContent>
-        </Card>
-
-        <Card class="h-full">
-          <CardContent class="p-6 space-y-3">
-            <div class="text-2xl">🧩</div>
-            <h3 class="text-lg font-semibold">UI Components</h3>
-            <p class="text-sm text-muted-foreground">
-              Beautiful, accessible components built with shadcn-vue and Tailwind CSS.
-            </p>
-          </CardContent>
-        </Card>
+        <FeatureCard
+          v-for="feature in features"
+          :key="feature.title"
+          :icon="feature.icon"
+          :title="feature.title"
+          :description="feature.description"
+        />
       </div>
     </section>
 
@@ -266,35 +247,14 @@ const techStack = [
       </div>
 
       <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-        <NuxtLink
+        <FeatureCard
           v-for="tech in techStack"
           :key="tech.name"
-          :to="tech.url"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="block h-full group"
-        >
-          <Card class="h-full group-hover:border-primary transition-all duration-200 relative overflow-hidden">
-            <!-- background -->
-            <div
-              class="absolute inset-0 bg-linear-to-br/hsl from-zinc-950 to-neutral-500 from-75% z-[1]"
-            />
-
-            <CardContent class="space-y-2 z-10">
-              <div class="text-lg">
-                {{ tech.icon }}
-              </div>
-              <div class="flex items-center gap-4 mb-2">
-                <h3 class="text-lg font-semibold">
-                  {{ tech.name }}
-                </h3>
-              </div>
-              <p class="text-muted-foreground text-sm">
-                {{ tech.description }}
-              </p>
-            </CardContent>
-          </Card>
-        </NuxtLink>
+          :icon="tech.icon"
+          :title="tech.name"
+          :description="tech.description"
+          :url="tech.url"
+        />
       </div>
     </section>
 
