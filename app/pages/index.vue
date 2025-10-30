@@ -58,6 +58,24 @@ const techStack = [
     url: 'https://github.com/danielroe/nuxt-workers',
   },
   {
+    icon: '⚙️',
+    name: 'nuxt-processor',
+    description: 'Background job processing with Bull queues',
+    url: 'https://github.com/danielroe/nuxt-processor',
+  },
+  {
+    icon: '📊',
+    name: 'Bull Board',
+    description: 'Beautiful UI dashboard for monitoring job queues',
+    url: 'https://github.com/felixmosh/bull-board',
+  },
+  {
+    icon: '🔴',
+    name: 'Redis',
+    description: 'In-memory data store for job queue management',
+    url: 'https://redis.io',
+  },
+  {
     icon: '📨',
     name: 'Vue Email',
     description: 'Build and send emails using Vue & TypeScript',
@@ -65,9 +83,9 @@ const techStack = [
   },
   {
     icon: '✉️',
-    name: 'Nodemailer',
-    description: 'Send emails easily with SMTP',
-    url: 'https://nodemailer.com',
+    name: 'Resend',
+    description: 'Modern email API for developers',
+    url: 'https://resend.com',
   },
   {
     icon: '🔎',
@@ -133,20 +151,22 @@ const techStack = [
       <!-- hero content -->
       <div class="container mx-auto px-4 lg:px-0 lg:py-20 z-10">
         <div class="text-center">
-          <h1 class="text-4xl font-bold mb-4">
-            {{ appConfig.app.name }}
+          <div class="inline-flex items-center gap-2 rounded-full border border-border/60 bg-background/80 px-4 py-1.5 text-sm text-muted-foreground shadow-sm backdrop-blur mb-6">
+            <span>✨ Fullstack starter template for Nuxt</span>
+          </div>
+          <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold mb-4">
+            Ship fast with {{ appConfig.app.name }}
           </h1>
           <p class="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
-            {{ appConfig.app.description }}
+            {{ appConfig.app.description }} Whether you're building an MVP, dashboard, or internal tool — Nuxia gives you a powerful starting point with clean and minimal setup.
           </p>
-          <div class="flex justify-center items-center">
-            <Button as-child>
+          <div class="flex justify-center items-center flex-wrap gap-4">
+            <Button as-child size="lg">
               <NuxtLink to="/auth/login">
                 Get Started
               </NuxtLink>
             </Button>
-            <!-- github -->
-            <Button as-child variant="outline" class="ml-4">
+            <Button as-child variant="outline" size="lg">
               <NuxtLink href="https://github.com/gravitano/nuxia" target="_blank" rel="noopener noreferrer">
                 View on GitHub
               </NuxtLink>
@@ -157,17 +177,91 @@ const techStack = [
     </section>
 
     <section
-      id="tech-stack"
-      class="container mx-auto px-4 lg:px-0 py-12 animate-fade-in-up"
+      id="features"
+      class="container mx-auto px-4 lg:px-0 py-20"
     >
       <div>
         <h2 class="text-3xl font-bold mb-2 text-center">
-          Tech Stack
+          Everything You Need to Ship Fast
+        </h2>
+        <p class="text-muted-foreground text-center mb-12 max-w-2xl mx-auto">
+          Nuxia comes preconfigured with authentication, email, job queues, database migrations, and a beautiful UI component library. Start building your product, not the infrastructure.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <Card class="h-full">
+          <CardContent class="p-6 space-y-3">
+            <div class="text-2xl">🔐</div>
+            <h3 class="text-lg font-semibold">Authentication</h3>
+            <p class="text-sm text-muted-foreground">
+              Secure authentication flows with nuxt-auth-utils, JWT secrets, and protected routes.
+            </p>
+          </CardContent>
+        </Card>
+
+        <Card class="h-full">
+          <CardContent class="p-6 space-y-3">
+            <div class="text-2xl">📨</div>
+            <h3 class="text-lg font-semibold">Email System</h3>
+            <p class="text-sm text-muted-foreground">
+              Build beautiful emails with Vue Email and send them via Resend API integration.
+            </p>
+          </CardContent>
+        </Card>
+
+        <Card class="h-full">
+          <CardContent class="p-6 space-y-3">
+            <div class="text-2xl">⚙️</div>
+            <h3 class="text-lg font-semibold">Job Queues</h3>
+            <p class="text-sm text-muted-foreground">
+              Background job processing with Bull queues, Redis, and a beautiful Bull Board dashboard.
+            </p>
+          </CardContent>
+        </Card>
+
+        <Card class="h-full">
+          <CardContent class="p-6 space-y-3">
+            <div class="text-2xl">🐘</div>
+            <h3 class="text-lg font-semibold">Database Management</h3>
+            <p class="text-sm text-muted-foreground">
+              Type-safe database operations with Drizzle ORM, migrations, and PostgreSQL.
+            </p>
+          </CardContent>
+        </Card>
+
+        <Card class="h-full">
+          <CardContent class="p-6 space-y-3">
+            <div class="text-2xl">🌱</div>
+            <h3 class="text-lg font-semibold">Type Safety</h3>
+            <p class="text-sm text-muted-foreground">
+              End-to-end TypeScript with Zod schemas shared between client and server.
+            </p>
+          </CardContent>
+        </Card>
+
+        <Card class="h-full">
+          <CardContent class="p-6 space-y-3">
+            <div class="text-2xl">🧩</div>
+            <h3 class="text-lg font-semibold">UI Components</h3>
+            <p class="text-sm text-muted-foreground">
+              Beautiful, accessible components built with shadcn-vue and Tailwind CSS.
+            </p>
+          </CardContent>
+        </Card>
+      </div>
+    </section>
+
+    <section
+      id="tech-stack"
+      class="container mx-auto px-4 lg:px-0 py-20"
+    >
+      <div>
+        <h2 class="text-3xl font-bold mb-2 text-center">
+          Powered by Modern Tools
         </h2>
         <p class="text-muted-foreground text-center mb-8 max-w-2xl mx-auto">
-          Nuxia is built with a modern tech stack that ensures performance,
-          scalability, and developer experience. Here are the key technologies
-          we use:
+          Built with the best-in-class tools for fullstack development. A carefully selected stack that balances developer experience with production scalability.
         </p>
       </div>
 
